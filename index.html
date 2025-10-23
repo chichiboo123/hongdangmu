@@ -556,19 +556,20 @@
             left: 50%;
             transform: translateX(-50%);
             background-color: rgba(255, 255, 255, 0.95);
-            padding: 8px 12px;
+            padding: 8px 10px;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             z-index: 1001;
             display: flex;
             align-items: center;
-            gap: 10px;
-            flex-wrap: wrap; /* Allow wrapping */
-            justify-content: center; /* Center items if wrapped */
+            gap: 6px;
+            flex-wrap: nowrap; /* Prevent wrapping */
             visibility: hidden; /* Hidden by default */
             opacity: 0;
             transition: visibility 0s 0.2s, opacity 0.2s ease-out;
-            max-width: 90%; /* Prevent overflow on small screens */
+            max-width: 98%; /* Maximize available width */
+            overflow-x: auto; /* Allow horizontal scroll if needed */
+            white-space: nowrap; /* Prevent text wrapping */
          }
           #element-controls.visible {
               visibility: visible;
@@ -576,13 +577,17 @@
               transition: opacity 0.2s ease-out;
           }
          #element-controls label, #element-controls input, #element-controls select, #element-controls button {
-             font-size: 12px;
+             font-size: 11px;
              margin: 0;
-             padding: 4px;
+             padding: 3px 4px;
+             flex-shrink: 0; /* Prevent shrinking */
+         }
+         #element-controls label {
+             white-space: nowrap; /* Keep label text on one line */
          }
           #element-controls input[type="color"] {
-              width: 25px;
-              height: 25px;
+              width: 24px;
+              height: 24px;
               border: none;
               padding: 0;
               border-radius: 4px;
@@ -599,14 +604,15 @@
                border-radius: 4px;
            }
             #element-controls input[type="number"] {
-                width: 50px;
+                width: 45px;
                  border: 1px solid #ccc;
                  border-radius: 4px;
             }
             #element-controls select {
                  border: 1px solid #ccc;
                  border-radius: 4px;
-                height: 28px; /* Match height */
+                height: 26px; /* Match height */
+                min-width: 70px; /* Ensure select has minimum width */
             }
          #delete-element-btn {
              background-color: #ef4444; color: white; border: none; border-radius: 4px; cursor: pointer; padding: 4px 6px;
@@ -815,7 +821,7 @@
             border-color: #404040;
             color: #e5e7eb;
         }
-        
+
         /* 반응형 크기 조정 - 부드러운 전환 */
         @media (max-width: 768px) {
             .top-controls {
@@ -831,7 +837,7 @@
                 height: 18px;
             }
         }
-        
+
         @media (max-width: 640px) {
             .top-controls {
                 top: 0.5rem;
@@ -850,7 +856,7 @@
                 font-size: 2.5rem !important;
             }
         }
-        
+
         @media (max-width: 480px) {
             .top-controls {
                 top: 0.5rem;
@@ -880,7 +886,7 @@
         <!-- Theme Toggle -->
         <button id="theme-toggle" class="control-btn" title="Dark/Light Mode">
             <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 8 1010.586 10.586z"/>
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
             </svg>
         </button>
         <!-- Backup Download -->
@@ -917,9 +923,25 @@
             <div class="text-8xl md:text-9xl mb-8 animate-bounce">🥕</div>
             <h2 class="grandiflora text-4xl font-bold text-orange-500">홍당뮤에 온 걸 환영해!</h2>
             <p class="text-gray-700 font-bold mt-4 mb-8 text-lg">홍익인간 = 당신의 생각 + 뮤지컬</p>
-            <button id="manual-button" class="bg-orange-400 hover:bg-orange-500 text-white font-bold text-xl px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 inline-flex items-center gap-2">
+            <button id="manual-button" class="bg-orange-400 hover:bg-orange-500 text-white font-bold text-xl px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 inline-flex items-center gap-2 mb-6">
                 설명서 📖
             </button>
+
+            <!-- Additional Navigation Buttons -->
+            <div class="flex flex-wrap gap-4 justify-center mt-4">
+                <button data-tab="fruit" class="extra-nav-button bg-red-100 hover:bg-red-200 text-red-700 font-bold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 inline-flex items-center gap-2">
+                    <i data-lucide="apple" class="w-5 h-5"></i>
+                    열매맺기
+                </button>
+                <button data-tab="dictionary" class="extra-nav-button bg-teal-100 hover:bg-teal-200 text-teal-700 font-bold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 inline-flex items-center gap-2">
+                    <i data-lucide="book-marked" class="w-5 h-5"></i>
+                    생각사전
+                </button>
+                <button data-tab="report" class="extra-nav-button bg-purple-100 hover:bg-purple-200 text-purple-700 font-bold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 inline-flex items-center gap-2">
+                    <i data-lucide="file-bar-chart" class="w-5 h-5"></i>
+                    보고서
+                </button>
+            </div>
         </div>
 
         <!-- 메인 콘텐츠 (탭) -->
@@ -1494,8 +1516,10 @@
                                          <div id="button-controls" class="hidden items-center gap-2">
                                               <label for="button-text">텍스트:</label>
                                               <input type="text" id="button-text" class="border rounded w-20">
-                                              <label for="button-bgcolor">배경색:</label> <!-- 버튼 색상 -->
+                                              <label for="button-bgcolor">배경색:</label>
                                               <input type="color" id="button-bgcolor">
+                                              <label for="button-textcolor">글자색:</label>
+                                              <input type="color" id="button-textcolor">
                                               <label for="button-shape">모양:</label>
                                               <select id="button-shape" class="border rounded text-xs">
                                                  <option value="">사각형</option>
@@ -2063,20 +2087,6 @@
                     <i data-lucide="book-open" class="w-6 h-6"></i>
                     <span class="text-xs font-bold">어둠</span>
                 </button>
-                <button data-tab="fruit" class="nav-button tab-button flex flex-col items-center justify-center gap-1 transition-all w-16 min-h-[48px]">
-                    <i data-lucide="apple" class="w-6 h-6"></i>
-                    <span class="text-xs font-bold">열매</span>
-                </button>
-                <!-- 생각사전 탭 버튼 -->
-                <button data-tab="dictionary" class="nav-button tab-button flex flex-col items-center justify-center gap-1 transition-all w-16 min-h-[48px]">
-                    <i data-lucide="book-marked" class="w-6 h-6"></i>
-                    <span class="text-xs font-bold">사전</span>
-                </button>
-                <!-- 보고서 탭 버튼 -->
-                <button data-tab="report" class="nav-button tab-button flex flex-col items-center justify-center gap-1 transition-all w-16 min-h-[48px]">
-                    <i data-lucide="file-bar-chart" class="w-6 h-6"></i>
-                    <span class="text-xs font-bold">보고서</span>
-                </button>
             </div>
             <!-- Footer 텍스트 -->
             <div class="text-center py-2">
@@ -2094,36 +2104,36 @@
             padding-bottom: 110px; /* 네비게이션 + footer 텍스트 높이 */
             -webkit-text-size-adjust: 100%; /* 모바일 텍스트 자동 확대 방지 */
         }
-        
+
         /* 모바일 최적화 */
         @media (max-width: 768px) {
             .container {
                 padding-left: 1rem;
                 padding-right: 1rem;
             }
-            
+
             /* 터치 영역 최소 크기 보장 */
             button, .emoji-btn, .nav-button {
                 min-height: 44px;
                 min-width: 44px;
             }
-            
+
             /* 입력 필드 줌 방지 */
             input, textarea, select {
                 font-size: 16px !important;
             }
         }
-        
+
         /* 작은 모바일 화면 */
         @media (max-width: 480px) {
             h1 {
                 font-size: 2.5rem !important;
             }
-            
+
             h2 {
                 font-size: 1.25rem !important;
             }
-            
+
             .nav-button span {
                 font-size: 0.65rem;
             }
@@ -2171,6 +2181,7 @@
          const emojiSizeInput = document.getElementById('emoji-size');
          const buttonTextInput = document.getElementById('button-text');
          const buttonBgColorInput = document.getElementById('button-bgcolor'); // Button color
+         const buttonTextColorInput = document.getElementById('button-textcolor'); // New: Button text color
          const buttonShapeSelect = document.getElementById('button-shape');
          const deleteElementBtn = document.getElementById('delete-element-btn');
          const emojiPickerModal = document.getElementById('emoji-picker-modal');
@@ -2321,7 +2332,7 @@
           }
 
 
-        // Event Listeners for Main Tabs (Now includes 'dictionary')
+        // Event Listeners for Main Tabs
         if (homeButton) {
             homeButton.addEventListener('click', () => {
                 showPage('home');
@@ -2337,6 +2348,18 @@
                  } else {
                      console.warn("Button clicked without data-tab attribute:", button);
                  }
+            });
+        });
+
+        // Event Listeners for Extra Navigation Buttons (Fruit, Dictionary, Report)
+        const extraNavButtons = document.querySelectorAll('.extra-nav-button');
+        extraNavButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabName = button.dataset.tab;
+                if (tabName) {
+                    showPage('main');
+                    setActiveTab(tabName);
+                }
             });
         });
 
@@ -2694,7 +2717,7 @@
         if (timerDisplay) updateTimerDisplay(); // Check if timerDisplay exists before calling
 
 
-        // --- '창문' 탭 신규 기능 스크립트 끝 ---
+        // --- '창문' 탭 신규 기능 스크립트 ---
 
         // --- '미닫이문' 탭 스크립트 ---
         const doorTabButtons = document.querySelectorAll('.door-tab-btn');
@@ -3387,10 +3410,11 @@
               } else if (type === 'emoji' && emojiControls && emojiSizeInput) {
                   emojiControls.classList.remove('hidden');
                   emojiSizeInput.value = parseInt(element.style.fontSize) || 24;
-              } else if (type === 'button' && buttonControls && buttonTextInput && buttonBgColorInput && buttonShapeSelect) {
+              } else if (type === 'button' && buttonControls && buttonTextInput && buttonBgColorInput && buttonTextColorInput && buttonShapeSelect) { // Include text color input
                   buttonControls.classList.remove('hidden');
                    buttonTextInput.value = element.textContent;
                     buttonBgColorInput.value = element.style.backgroundColor ? rgbToHex(element.style.backgroundColor) : '#3b82f6'; // Default blue
+                    buttonTextColorInput.value = element.style.color ? rgbToHex(element.style.color) : '#ffffff'; // Default white text color
                    buttonShapeSelect.value = element.dataset.shape || '';
                    // Size inputs removed
               } else if (type === 'image' && imageControls) {
@@ -3472,6 +3496,13 @@
                     saveCurrentPageState();
                 }
             });
+             // New handler for button text color
+             if (buttonTextColorInput) buttonTextColorInput.addEventListener('input', (e) => {
+                 if (selectedElement && selectedElement.dataset.type === 'button') {
+                     selectedElement.style.color = e.target.value;
+                     saveCurrentPageState();
+                 }
+             });
           if (buttonShapeSelect) buttonShapeSelect.addEventListener('change', (e) => {
                  if (selectedElement && selectedElement.dataset.type === 'button') { // Only for button
                      const shape = e.target.value;
@@ -3579,7 +3610,7 @@
 
 
                 document.addEventListener('mousemove', resizeMove);
-                document.addEventListener('mouseup', stopResize);
+                                document.addEventListener('mouseup', stopResize);
                  document.addEventListener('touchmove', resizeMove, { passive: false });
                  document.addEventListener('touchend', stopResize);
             }
@@ -3809,6 +3840,7 @@
                  element.style.width = 'auto';
                  element.style.height = 'auto';
                  element.style.backgroundColor = '#3b82f6'; // Default color
+                 element.style.color = '#ffffff'; // Default text color
              } else if (type === 'image') {
                  element = document.createElement('div');
                  element.className = 'app-element image-element';
@@ -3853,7 +3885,7 @@
 
 
 
-          // Initial page render
+          // --- Initial page render ---
          if (appDesignScreen) renderPage(0); // Check if appDesignScreen exists
 
         // --- '미닫이문' 탭 스크립트 끝 ---
@@ -3870,11 +3902,10 @@
 
         // 성찰 관련 이모지 리스트
         const reflectionEmojis = [
-            '😊', '😄', '😍', '😂', '💖', '👍', '🎉', '✨', '🌟', '🤔',
-            '😢', '😥', '😠', '🤯', '🥵', '😵‍💫', '😴', '😟', '😕', // 중복된 😥 제거
-            '🌱', '💡', '🧠', '📚', '✍️', '🔍', '🎯', '🚀', '📈', '💪',
-            '🤝', '👥', '🗣️', '🙏', '🤗', '💬', '⏳', '🏁', '➡️', '❓',
-            '❗', '✅', '❌', '🔄', '💔', '❤️', '🙌', '💯', '🔥', '💧'
+            '😀', '😂', '😊', '😍', '🤔', '😢', '😠', '😮', '🎉', '💖', '👍', '👎',
+            '👋', '🙏', '👀', '👂', '👃', '👄', '🧠', '👤', '👥', '💬', '✏️', '🔒',
+            '🔑', '💡', '🔍', '⚙️', '📞', '⏰', '⭐', '❤️', '💔', '💯', '✅', '❌',
+            '❓', '❗', '➡️', '⬅️', '⬆️', '⬇️', '➕', '➖', '🏠', '🏫', '🏢', '🌍'
         ];
 
         // 새 이모지 피커 모달 채우기
@@ -4119,7 +4150,7 @@
                  manualWindow: '3. 창문 (아이디어 떠올리기)',
                  manualWindowDesc: '발견한 문제를 어떻게 해결할지, 세상을 향한 창문을 열고 상상의 나래를 펼쳐요.',
                  manualDoor: '4. 미닫이문 (만들고 실천하기)',
-                 manualDoorDesc: '우리의 아이디어를 눈에 보이게 만들고 실험해봐요.',
+                 manualDoorDesc: '우리의 아이디어를 눈에 보이는 형태로 만들고 실험해봐요.',
                  manualDarkness: '5. 어둠 (성찰하기)',
                  manualDarknessDesc: '어둠은 새로운 빛을 기다리는 쉼의 시간입니다. 배운 내용을 정리해봐요.',
                  manualFruit: '+ 열매맺기 (논술작성)',
@@ -4231,12 +4262,39 @@
              const startBtn = document.getElementById('start-from-modal-button');
              if (startBtn) startBtn.textContent = t.start;
 
-             // Nav buttons
+             // Nav buttons (now only 6)
              const navButtons = document.querySelectorAll('.nav-button span');
              navButtons.forEach((span, idx) => {
-                 const btnKey = ['home', 'light', 'mirror', 'window', 'door', 'darkness', 'fruit', 'dictionary', 'report'][idx];
+                 const btnKey = ['home', 'light', 'mirror', 'window', 'door', 'darkness'][idx];
                  if (t[btnKey]) span.textContent = t[btnKey];
              });
+
+             // Extra nav buttons on home page
+             const extraNavButtons = document.querySelectorAll('.extra-nav-button');
+             if (extraNavButtons.length >= 3) {
+                 const fruitBtn = extraNavButtons[0];
+                 const dictBtn = extraNavButtons[1];
+                 const reportBtn = extraNavButtons[2];
+
+                 if (fruitBtn) {
+                     const icon = fruitBtn.querySelector('i');
+                     fruitBtn.innerHTML = '';
+                     if (icon) fruitBtn.appendChild(icon);
+                     fruitBtn.appendChild(document.createTextNode(lang === 'kor' ? '열매맺기' : 'Harvest'));
+                 }
+                 if (dictBtn) {
+                     const icon = dictBtn.querySelector('i');
+                     dictBtn.innerHTML = '';
+                     if (icon) dictBtn.appendChild(icon);
+                     dictBtn.appendChild(document.createTextNode(lang === 'kor' ? '생각사전' : 'Dictionary'));
+                 }
+                 if (reportBtn) {
+                     const icon = reportBtn.querySelector('i');
+                     reportBtn.innerHTML = '';
+                     if (icon) reportBtn.appendChild(icon);
+                     reportBtn.appendChild(document.createTextNode(lang === 'kor' ? '보고서' : 'Report'));
+                 }
+             }
 
              // Tab titles in main content
              const lightTitle = document.querySelector('#content-light h2');
@@ -4291,38 +4349,38 @@
              // References section
              const refTheory = document.querySelector('#manual-modal .mt-6.pt-6 .space-y-3 > div:nth-child(1) p:nth-child(1)');
              if (refTheory) refTheory.textContent = t.referenceTheory;
-             
+
              const refCitation1 = document.querySelector('#manual-modal .mt-6.pt-6 .space-y-3 > div:nth-child(1) p:nth-child(2)');
              if (refCitation1) refCitation1.textContent = t.referenceCitation1;
-             
+
              const refDesc1 = document.querySelector('#manual-modal .mt-6.pt-6 .space-y-3 > div:nth-child(1) p:nth-child(3)');
              if (refDesc1) refDesc1.textContent = t.referenceDesc1;
-             
+
              const refDesign = document.querySelector('#manual-modal .mt-6.pt-6 .space-y-3 > div:nth-child(2) p:nth-child(1)');
              if (refDesign) refDesign.textContent = t.referenceDesign;
-             
+
              const refCitation2 = document.querySelector('#manual-modal .mt-6.pt-6 .space-y-3 > div:nth-child(2) p:nth-child(2)');
              if (refCitation2) refCitation2.textContent = t.referenceCitation2;
-             
+
              const refDesc2 = document.querySelector('#manual-modal .mt-6.pt-6 .space-y-3 > div:nth-child(2) p:nth-child(3)');
              if (refDesc2) refDesc2.textContent = t.referenceDesc2;
 
              // Developer section
              const devTitle = document.querySelector('#manual-modal .mt-8.pt-6 h3');
              if (devTitle) devTitle.textContent = t.developerTitle;
-             
+
              const devName = document.querySelector('#manual-modal .mt-8.pt-6 .bg-orange-50 p:nth-child(1)');
              if (devName) devName.textContent = t.developerName;
-             
+
              const devDesc1 = document.querySelector('#manual-modal .mt-8.pt-6 .bg-orange-50 p:nth-child(2)');
              if (devDesc1) devDesc1.textContent = t.developerDesc1;
-             
+
              const devDesc2 = document.querySelector('#manual-modal .mt-8.pt-6 .bg-orange-50 p:nth-child(3)');
              if (devDesc2) devDesc2.textContent = t.developerDesc2;
-             
+
              const devDesc3 = document.querySelector('#manual-modal .mt-8.pt-6 .bg-orange-50 p:nth-child(4)');
              if (devDesc3) devDesc3.textContent = t.developerDesc3;
-             
+
              const devDesc4 = document.querySelector('#manual-modal .mt-8.pt-6 .bg-orange-50 p:nth-child(5)');
              if (devDesc4) devDesc4.textContent = t.developerDesc4;
 
