@@ -951,7 +951,7 @@
             <div class="p-6 md:p-8">
                 <!-- 1. 빛 (영감) 콘텐츠 -->
                 <div id="content-light" class="tab-content space-y-6 animate-fade-in">
-                     <h2 class="text-2xl font-bold text-amber-500">1단계: 생각의 시작 (빛) - 반짝! 영감 얻기</h2>
+                     <h2 class="text-2xl font-bold text-amber-500">[1단계 빛] 생각을 시작하다</h2>
                     <p class="text-gray-600">뮤지컬을 감상하고, 떠오르는 생각과 느낌을 자유롭게 정리해봐요.</p>
 
                     <div class="content-card p-6 rounded-xl shadow-sm">
@@ -1011,7 +1011,7 @@
 
                 <!-- 2. 거울 (공감/정의) 콘텐츠 -->
                 <div id="content-mirror" class="tab-content space-y-6 hidden animate-fade-in">
-                    <h2 class="text-2xl font-bold text-pink-500">2단계: 나를 비추는 (거울) - 끄덕! 공감하고 문제 정의하기</h2>
+                    <h2 class="text-2xl font-bold text-pink-500">[2단계 거울] 나를 비추어 보다</h2>
                     <p class="text-gray-600">뮤지컬 속 인물의 감정과 고민에 공감하고, 나의 경험과 연결하며 문제를 정의합니다.</p>
 
                     <!-- '공감' / '정의' 서브 탭 네비게이션 -->
@@ -1063,10 +1063,16 @@
                         <div class="content-card p-6 rounded-xl shadow-sm">
                             <h3 class="font-bold text-lg mb-2 flex items-center gap-2">🤔 인물의 고민과 속마음 (니즈 찾기)</h3>
                             <p class="text-sm text-gray-500 mb-4">"이 인물은 무엇을 원했을까?" 질문에 답해보고, 인물의 감정을 슬라이더로 조절해 보세요.</p>
-                            <textarea class="w-full h-24 bg-pink-50 border border-pink-200 rounded-lg p-3 text-pink-900 focus:ring-2 focus:ring-pink-400 focus:outline-none placeholder:text-pink-600/70" placeholder="이 인물이 정말 원했던 것은..."></textarea>
+                            <textarea id="empathy-needs" class="w-full h-24 bg-pink-50 border border-pink-200 rounded-lg p-3 text-pink-900 focus:ring-2 focus:ring-pink-400 focus:outline-none placeholder:text-pink-600/70" placeholder="이 인물이 정말 원했던 것은..."></textarea>
                             <div class="mt-4">
-                                <label for="emotion-slider" class="block text-sm font-medium text-gray-700 mb-2">감정 조절하기 (예: 슬픔 😥 ... 기쁨 😀)</label>
-                                <input type="range" id="emotion-slider" class="emotion-slider" min="0" max="100" value="50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <label for="emotion-name" class="text-sm font-medium text-gray-700">대표 감정은 몇 퍼센트?</label>
+                                    <input type="text" id="emotion-name" class="flex-grow bg-white border border-pink-200 rounded-lg p-2 text-sm text-pink-900 focus:ring-1 focus:ring-pink-400 focus:outline-none placeholder:text-pink-600/70" placeholder="예: 슬픔, 기쁨, 분노 등">
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" id="emotion-slider" class="emotion-slider flex-grow" min="0" max="100" value="50">
+                                    <span id="emotion-percentage" class="text-lg font-bold text-pink-600 min-w-[3rem]">50%</span>
+                                </div>
                             </div>
                         </div>
 
@@ -1101,7 +1107,7 @@
                                 <div>
                                     <span class="font-bold">[인물]</span>은(는) <span class="font-bold text-pink-600">[필요한 것]</span>을(를) 필요로 한다.
                                     <br>
-                                    왜냐하면 <span class="font-bold text-pink-600">[이유/생각]</span> 때문이다.
+                                    왜냐하면 <span class="font-bold text-pink-600">[이유/생각]</span>
                                 </div>
                             </div>
                         </div>
@@ -1110,7 +1116,7 @@
 
                 <!-- 3. 창문 (재정의/아이디어) 콘텐츠 -->
                 <div id="content-window" class="tab-content space-y-6 hidden animate-fade-in">
-                    <h2 class="text-2xl font-bold text-blue-500">3단계: 세상을 보는 (창문) - 상상! 아이디어 펼치기</h2>
+                    <h2 class="text-2xl font-bold text-blue-500">[3단계 창문] 세상을 보다</h2>
                     <p class="text-gray-600">우리가 발견한 문제를 더 나은 세상을 위한 질문으로 바꾸고, 창의적인 아이디어를 자유롭게 상상해 보세요.</p>
 
                     <!-- '재정의' / '아이디어' 서브 탭 네비게이션 -->
@@ -1372,7 +1378,7 @@
 
                 <!-- 4. 미닫이문 (제작) 콘텐츠 -->
                 <div id="content-door" class="tab-content space-y-6 hidden animate-fade-in">
-                     <h2 class="text-2xl font-bold text-emerald-500">4단계: 세상으로 나아가는 (미닫이문) - 뚝딱! 만들어보기</h2>
+                     <h2 class="text-2xl font-bold text-emerald-500">[4단계 미닫이문] 세상으로 나아가다</h2>
 
                     <!-- '프로토타입' / '테스트' 서브 탭 네비게이션 -->
                     <div class="border-b border-gray-200">
@@ -1551,6 +1557,12 @@
                                                  <p class="text-gray-400 text-center text-sm absolute inset-0 flex items-center justify-center pointer-events-none">컨트롤 버튼을 눌러 요소를 추가하세요.</p>
                                             </div>
                                         </div>
+                                        <!-- Export Button -->
+                                        <div class="text-center mt-4">
+                                            <button id="export-appdesign-webp" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-6 rounded-lg transition-colors shadow hover:shadow-md inline-flex items-center gap-2">
+                                                <i data-lucide="download" class="w-5 h-5"></i> WebP로 내보내기
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1605,7 +1617,7 @@
 
                 <!-- 5. 어둠 (성찰) 콘텐츠 -->
                 <div id="content-darkness" class="tab-content space-y-6 hidden animate-fade-in">
-                    <h2 class="text-2xl font-bold text-violet-500">5단계: 생각을 정리하는 (어둠) - 성장! 배움 확장하기</h2>
+                    <h2 class="text-2xl font-bold text-violet-500">[5단계 어둠] 배움의 과정을 돌아보다</h2>
                     <p class="text-gray-600">우리의 학습 여정을 돌아보며 무엇을 배우고 느꼈는지 정리하고, 다음 단계를 준비해 봅시다.</p>
 
                     <!-- '알감장 쓰기' (신규) -->
@@ -1746,6 +1758,11 @@
                         <input type="text" id="report-author-name" placeholder="이름을 입력하세요" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:outline-none">
                     </div>
 
+                    <!-- 작성자 표시 -->
+                    <div class="content-card p-3 rounded-xl shadow-sm bg-purple-50">
+                        <p class="text-sm text-gray-700">보고서 작성자: <span id="report-author-display" class="font-semibold text-purple-700">-</span></p>
+                    </div>
+
                     <div id="report-content" class="content-card p-8 rounded-xl shadow-sm space-y-8">
                         <!-- 1단계: 빛 -->
                         <section class="border-l-4 border-amber-500 pl-6">
@@ -1784,20 +1801,28 @@
                                         <p><strong>행동:</strong> <span id="report-action"></span></p>
                                     </div>
                                 </div>
+                                <!-- 2단계 추가 항목 -->
                                 <div>
-                                    <h4 class="font-semibold text-pink-700 mb-2">POV 문장</h4>
+                                    <h4 class="font-semibold text-pink-700 mb-2">인물의 고민과 속마음</h4>
                                     <div class="bg-pink-50 p-3 rounded text-sm">
-                                        <p><strong>필요:</strong> <span id="report-pov-need"></span></p>
+                                        <p><strong>니즈:</strong> <span id="report-needs"></span></p>
+                                        <p><strong>감정 슬라이더:</strong> <span id="report-emotion-slider"></span></p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-pink-700 mb-2">나의 경험과 연결하기</h4>
+                                    <p class="bg-pink-50 p-3 rounded text-sm" id="report-my-experience"></p>
+                                </div>
+                                <!-- POV 문장 -->
+                                <div>
+                                    <h4 class="font-semibold text-pink-700 mb-2">PoV 문장</h4>
+                                    <div class="bg-pink-50 p-3 rounded text-sm">
+                                        <p><strong>필요한 것:</strong> <span id="report-pov-need"></span></p>
                                         <p><strong>이유:</strong> <span id="report-pov-reason"></span></p>
+                                        <p id="report-pov-sentence"></p>
                                     </div>
                                 </div>
                             </div>
-                        </section>
-
-                        <!-- 작성자 정보 -->
-                        <section class="border-l-4 border-purple-500 pl-6">
-                            <h3 class="text-xl font-bold text-purple-600 mb-4">👤 작성자</h3>
-                            <p class="bg-purple-50 p-3 rounded text-sm" id="report-author-display">-</p>
                         </section>
 
                         <!-- 3단계: 창문 -->
@@ -1865,11 +1890,19 @@
                                 </div>
                                 <div>
                                     <h4 class="font-semibold text-emerald-700 mb-2">피드백 요약</h4>
-                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm mb-4">
                                         <div class="bg-green-50 p-3 rounded"><strong>좋았던 점:</strong> <span id="report-feedback-plus"></span></div>
                                         <div class="bg-yellow-50 p-3 rounded"><strong>개선할 점:</strong> <span id="report-feedback-delta"></span></div>
                                         <div class="bg-blue-50 p-3 rounded"><strong>궁금한 점:</strong> <span id="report-feedback-question"></span></div>
                                         <div class="bg-orange-50 p-3 rounded"><strong>새 아이디어:</strong> <span id="report-feedback-idea"></span></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-emerald-700 mb-2">좋·아·바 포스트잇</h4>
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+                                        <div class="bg-pink-50 p-3 rounded"><strong>좋은 점:</strong> <span id="report-feedback-like"></span></div>
+                                        <div class="bg-gray-50 p-3 rounded"><strong>아쉬운 점:</strong> <span id="report-feedback-lack"></span></div>
+                                        <div class="bg-purple-50 p-3 rounded"><strong>바라는 점:</strong> <span id="report-feedback-wish"></span></div>
                                     </div>
                                 </div>
                             </div>
@@ -2158,6 +2191,229 @@
 
         const tabContents = document.querySelectorAll('.tab-content');
 
+        // --- 로컬 스토리지 자동 저장 기능 ---
+        const STORAGE_KEY = 'hongdangmu_data';
+        const AUTOSAVE_DELAY = 1000; // 1초 후 자동 저장
+        let saveTimeout = null;
+
+        // 저장할 필드 목록
+        function getAllFormFields() {
+            const fields = {};
+            
+            // 모든 input, textarea, select 요소 수집
+            document.querySelectorAll('input[type="text"], input[type="number"], input[type="color"], input[type="range"], textarea, select').forEach(el => {
+                if (el.id && el.id !== 'backup-file-input' && el.id !== 'image-upload-input') {
+                    fields[el.id] = el.value;
+                }
+            });
+
+            // 선택된 이모지
+            const selectedEmoji = document.getElementById('selected-emoji');
+            if (selectedEmoji) fields['selected-emoji'] = selectedEmoji.value;
+
+            // 질문 목록
+            const questionList = document.getElementById('question-list');
+            if (questionList) {
+                const questions = [];
+                questionList.querySelectorAll('li:not(#question-placeholder)').forEach(q => {
+                    const text = q.querySelector('span')?.textContent || q.textContent.replace('삭제', '').trim();
+                    if (text) questions.push(text);
+                });
+                fields['questions'] = JSON.stringify(questions);
+            }
+
+            // 아이디어 말풍선
+            const ideaBubbles = document.querySelectorAll('#idea-bubble-list-container .post-it-bubble');
+            const ideas = [];
+            ideaBubbles.forEach(bubble => {
+                const name = bubble.querySelector('.post-it-name-input')?.value || '';
+                const text = bubble.querySelector('.post-it-text-bubble')?.value || '';
+                if (text) ideas.push({ name, text });
+            });
+            fields['ideas'] = JSON.stringify(ideas);
+
+            // 성찰 이모지
+            const reflectionEmojis = document.querySelectorAll('#reflection-emoji-sentence-box .selected-reflection-emoji');
+            const emojis = Array.from(reflectionEmojis).map(e => e.textContent);
+            fields['reflection-emojis'] = JSON.stringify(emojis);
+
+            // 앱 디자인 페이지
+            if (typeof appPages !== 'undefined') {
+                fields['appPages'] = JSON.stringify(appPages);
+            }
+
+            return fields;
+        }
+
+        // 로컬 스토리지에 저장
+        function saveToLocalStorage() {
+            try {
+                const data = {
+                    version: '1.0',
+                    timestamp: new Date().toISOString(),
+                    fields: getAllFormFields()
+                };
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+                console.log('데이터 자동 저장 완료');
+            } catch (error) {
+                console.error('저장 오류:', error);
+            }
+        }
+
+        // 로컬 스토리지에서 복원
+        function restoreFromLocalStorage() {
+            try {
+                const savedData = localStorage.getItem(STORAGE_KEY);
+                if (!savedData) return;
+
+                const data = JSON.parse(savedData);
+                const fields = data.fields;
+
+                // 일반 필드 복원
+                Object.keys(fields).forEach(id => {
+                    if (id === 'questions' || id === 'ideas' || id === 'reflection-emojis' || id === 'appPages') return;
+                    
+                    const el = document.getElementById(id);
+                    if (el && fields[id]) {
+                        el.value = fields[id];
+                        // 슬라이더 값 표시 업데이트
+                        if (id === 'emotion-slider') {
+                            const percentage = document.getElementById('emotion-percentage');
+                            if (percentage) percentage.textContent = fields[id] + '%';
+                        }
+                    }
+                });
+
+                // 질문 목록 복원
+                if (fields['questions']) {
+                    const questions = JSON.parse(fields['questions']);
+                    const questionList = document.getElementById('question-list');
+                    const placeholder = document.getElementById('question-placeholder');
+                    
+                    if (questionList && questions.length > 0) {
+                        if (placeholder) placeholder.classList.add('hidden');
+                        questions.forEach(questionText => {
+                            const newQuestion = document.createElement('li');
+                            newQuestion.className = 'p-3 bg-white border border-gray-200 rounded-lg text-gray-800 text-sm flex justify-between items-center';
+                            const textSpan = document.createElement('span');
+                            textSpan.textContent = questionText;
+                            newQuestion.appendChild(textSpan);
+                            const deleteBtn = document.createElement('button');
+                            deleteBtn.textContent = '삭제';
+                            deleteBtn.className = 'text-red-500 hover:text-red-700 text-xs font-medium ml-4';
+                            deleteBtn.onclick = () => {
+                                newQuestion.remove();
+                                const actualItemCount = Array.from(questionList.children).filter(child => child !== placeholder).length;
+                                if (actualItemCount === 0 && placeholder) placeholder.classList.remove('hidden');
+                                scheduleAutoSave();
+                            };
+                            newQuestion.appendChild(deleteBtn);
+                            questionList.appendChild(newQuestion);
+                        });
+                    }
+                }
+
+                // 아이디어 말풍선 복원
+                if (fields['ideas']) {
+                    const ideas = JSON.parse(fields['ideas']);
+                    const container = document.getElementById('idea-bubble-list-container');
+                    
+                    if (container) {
+                        ideas.forEach(idea => {
+                            const bubble = document.createElement('div');
+                            bubble.className = 'post-it-bubble';
+                            const innerDiv = document.createElement('div');
+                            innerDiv.className = 'post-it-bubble-inner';
+                            
+                            const nameInput = document.createElement('input');
+                            nameInput.type = 'text';
+                            nameInput.value = idea.name;
+                            nameInput.className = 'post-it-name-input';
+                            nameInput.addEventListener('input', scheduleAutoSave);
+                            innerDiv.appendChild(nameInput);
+                            
+                            const textArea = document.createElement('textarea');
+                            textArea.value = idea.text;
+                            textArea.className = 'post-it-text-bubble';
+                            textArea.addEventListener('input', function() {
+                                this.style.height = 'auto';
+                                this.style.height = (this.scrollHeight) + 'px';
+                                scheduleAutoSave();
+                            });
+                            innerDiv.appendChild(textArea);
+                            
+                            bubble.appendChild(innerDiv);
+                            
+                            const deleteBtn = document.createElement('button');
+                            deleteBtn.className = 'post-it-delete-bubble';
+                            deleteBtn.innerHTML = '&times;';
+                            deleteBtn.onclick = () => {
+                                bubble.remove();
+                                scheduleAutoSave();
+                            };
+                            bubble.appendChild(deleteBtn);
+                            
+                            container.prepend(bubble);
+                        });
+                    }
+                }
+
+                // 성찰 이모지 복원
+                if (fields['reflection-emojis']) {
+                    const emojis = JSON.parse(fields['reflection-emojis']);
+                    const sentenceBox = document.getElementById('reflection-emoji-sentence-box');
+                    const placeholder = sentenceBox?.querySelector('.placeholder');
+                    
+                    if (sentenceBox && emojis.length > 0) {
+                        if (placeholder) placeholder.classList.add('hidden');
+                        emojis.forEach(emoji => {
+                            const emojiSpan = document.createElement('span');
+                            emojiSpan.className = 'selected-reflection-emoji';
+                            emojiSpan.textContent = emoji;
+                            emojiSpan.addEventListener('click', () => {
+                                emojiSpan.remove();
+                                checkSentenceBoxPlaceholder();
+                                scheduleAutoSave();
+                            });
+                            sentenceBox.appendChild(emojiSpan);
+                        });
+                    }
+                }
+
+                // 앱 디자인 페이지 복원
+                if (fields['appPages'] && typeof appPages !== 'undefined') {
+                    appPages = JSON.parse(fields['appPages']);
+                    if (typeof renderPage === 'function' && typeof currentPageIndex !== 'undefined') {
+                        renderPage(currentPageIndex);
+                    }
+                }
+
+                // POV 문장, HMW 문장 업데이트
+                updatePovSentence();
+                updateHmwSentence();
+
+                console.log('데이터 복원 완료');
+            } catch (error) {
+                console.error('복원 오류:', error);
+            }
+        }
+
+        // 자동 저장 스케줄링
+        function scheduleAutoSave() {
+            if (saveTimeout) clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(saveToLocalStorage, AUTOSAVE_DELAY);
+        }
+
+        // 모든 입력 필드에 자동 저장 이벤트 리스너 추가
+        function setupAutoSave() {
+            document.querySelectorAll('input[type="text"], input[type="number"], input[type="color"], input[type="range"], textarea, select').forEach(el => {
+                if (el.id && el.id !== 'backup-file-input' && el.id !== 'image-upload-input') {
+                    el.addEventListener('input', scheduleAutoSave);
+                    el.addEventListener('change', scheduleAutoSave);
+                }
+            });
+        }
+
         const tabColors = {
             home: '#f97316',     // orange-500
             light: '#f59e0b',    // amber-500
@@ -2407,10 +2663,12 @@
                      if (actualItemCount === 0 && questionPlaceholder) {
                           questionPlaceholder.classList.remove('hidden');
                      }
+                     scheduleAutoSave();
                 };
                 newQuestion.appendChild(deleteBtn);
                 questionList.appendChild(newQuestion);
                 questionInput.value = '';
+                scheduleAutoSave();
             }
         }
 
@@ -2439,8 +2697,17 @@
                 <div>
                     <span class="font-bold">${character}</span>은(는) <span class="font-bold text-pink-600">${need}</span>을(를) 필요로 한다.
                     <br>
-                    왜냐하면 <span class="font-bold text-pink-600">${reason}</span> 때문이다.
+                    왜냐하면 <span class="font-bold text-pink-600">${reason}</span>
                 </div>`;
+        }
+
+        // Emotion slider percentage display
+        const emotionSlider = document.getElementById('emotion-slider');
+        const emotionPercentage = document.getElementById('emotion-percentage');
+        if (emotionSlider && emotionPercentage) {
+            emotionSlider.addEventListener('input', (e) => {
+                emotionPercentage.textContent = e.target.value + '%';
+            });
         }
 
         if (mirrorTabButtons.length > 0) {
@@ -2519,6 +2786,7 @@
                  nameInput.value = nameText; // Pre-fill if provided
                  nameInput.placeholder = '이름 (선택)';
                  nameInput.className = 'post-it-name-input';
+                 nameInput.addEventListener('input', scheduleAutoSave);
                  innerDiv.appendChild(nameInput);
 
                  // Idea Text Area (editable)
@@ -2532,6 +2800,7 @@
                  textArea.addEventListener('input', () => {
                      textArea.style.height = 'auto';
                      textArea.style.height = (textArea.scrollHeight) + 'px';
+                     scheduleAutoSave();
                  }, false);
                  innerDiv.appendChild(textArea);
 
@@ -2543,6 +2812,7 @@
                  deleteBtn.innerHTML = '&times;';
                  deleteBtn.onclick = () => {
                      bubble.remove();
+                     scheduleAutoSave();
                  };
                  bubble.appendChild(deleteBtn);
 
@@ -2550,6 +2820,7 @@
                  ideaNameInput.value = ''; // Clear inputs
                  ideaBubbleInput.value = '';
                  ideaNameInput.focus(); // Focus back on name for next entry
+                 scheduleAutoSave();
              }
          }
 
@@ -3890,6 +4161,46 @@
           // --- Initial page render ---
          if (appDesignScreen) renderPage(0); // Check if appDesignScreen exists
 
+         // --- WebP Export for App Design ---
+         const exportAppDesignBtn = document.getElementById('export-appdesign-webp');
+         if (exportAppDesignBtn && typeof html2canvas !== 'undefined') {
+             exportAppDesignBtn.addEventListener('click', () => {
+                 const phoneFrame = document.querySelector('.phone-frame');
+                 if (!phoneFrame) {
+                     alert('앱 디자인 화면을 찾을 수 없습니다.');
+                     return;
+                 }
+
+                 // Save current page state first
+                 saveCurrentPageState();
+
+                 html2canvas(phoneFrame, {
+                     scale: 2,
+                     useCORS: true,
+                     backgroundColor: '#1f2937'
+                 }).then(canvas => {
+                     canvas.toBlob((blob) => {
+                         const url = URL.createObjectURL(blob);
+                         const link = document.createElement('a');
+                         link.href = url;
+                         link.download = `앱디자인_페이지${currentPageIndex + 1}.webp`;
+                         link.click();
+                         URL.revokeObjectURL(url);
+                         
+                         // Show success message
+                         alert(`페이지 ${currentPageIndex + 1}이(가) 다운로드되었습니다!`);
+                     }, 'image/webp', 0.9);
+                 }).catch(err => {
+                     console.error('WebP 생성 오류:', err);
+                     alert('이미지 생성 중 오류가 발생했습니다.');
+                 });
+             });
+         } else if (exportAppDesignBtn && typeof html2canvas === 'undefined') {
+             console.error('html2canvas 라이브러리가 로드되지 않았습니다.');
+             exportAppDesignBtn.disabled = true;
+             exportAppDesignBtn.title = '이미지 생성 라이브러리 로딩 실패';
+         }
+
         // --- '미닫이문' 탭 스크립트 끝 ---
 
         // --- '어둠' 탭 스크립트 (신규) ---
@@ -3952,8 +4263,10 @@
             emojiSpan.addEventListener('click', () => {
                 emojiSpan.remove();
                 checkSentenceBoxPlaceholder(); // 이모지 삭제 후 플레이스홀더 체크
+                scheduleAutoSave();
             });
             sentenceBox.appendChild(emojiSpan);
+            scheduleAutoSave();
         }
 
         // 문장 상자가 비었는지 확인하고 플레이스홀더 표시/숨김
@@ -4136,13 +4449,20 @@
                  darkness: '어둠',
                  fruit: '열매',
                  dictionary: '사전',
+                 report: '보고서',
                  // Tab titles
-                 lightTitle: '1단계: 생각의 시작 (빛) - 반짝! 영감 얻기',
-                 mirrorTitle: '2단계: 나를 비추는 (거울) - 끄덕! 공감하고 문제 정의하기',
-                 windowTitle: '3단계: 세상을 보는 (창문) - 상상! 아이디어 펼치기',
-                 doorTitle: '4단계: 세상으로 나아가는 (미닫이문) - 뚝딱! 만들어보기',
-                 darknessTitle: '5단계: 생각을 정리하는 (어둠) - 성장! 배움 확장하기',
+                 lightTitle: '[1단계 빛] 생각을 시작하다',
+                 lightDesc: '뮤지컬을 감상하고, 떠오르는 생각과 느낌을 자유롭게 정리해봐요.',
+                 mirrorTitle: '[2단계 거울] 나를 비추어 보다',
+                 mirrorDesc: '뮤지컬 속 인물의 감정과 고민에 공감하고, 나의 경험과 연결하며 문제를 정의합니다.',
+                 windowTitle: '[3단계 창문] 세상을 보다',
+                 windowDesc: '우리가 발견한 문제를 더 나은 세상을 위한 질문으로 바꾸고, 창의적인 아이디어를 자유롭게 상상해 보세요.',
+                 doorTitle: '[4단계 미닫이문] 세상으로 나아가다',
+                 darknessTitle: '[5단계 어둠] 배움의 과정을 돌아보다',
+                 darknessDesc: '우리의 학습 여정을 돌아보며 무엇을 배우고 느꼈는지 정리하고, 다음 단계를 준비해 봅시다.',
                  fruitTitle: '열매맺기 - 논술 작성 및 공유하기',
+                 reportTitle: '📊 최종 보고서',
+                 reportDesc: '모든 단계에서 작성한 내용을 한눈에 확인할 수 있습니다.',
                  // Manual modal
                  manualTitle: '홍당뮤 설명서',
                  manualLight: '1. 빛 (영감 얻기)',
@@ -4194,11 +4514,17 @@
                  report: 'Report',
                  // Tab titles
                  lightTitle: 'Step 1: Light - Spark of Inspiration',
+                 lightDesc: 'Watch the musical and freely organize your thoughts and feelings.',
                  mirrorTitle: 'Step 2: Mirror - Empathy & Problem Definition',
+                 mirrorDesc: 'Empathize with characters\' emotions and struggles, connect with your own experiences, and define the problem.',
                  windowTitle: 'Step 3: Window - Ideation & Imagination',
+                 windowDesc: 'Transform the problems we discovered into questions for a better world, and freely imagine creative ideas.',
                  doorTitle: 'Step 4: Sliding Door - Prototyping & Making',
                  darknessTitle: 'Step 5: Reflection - Growth & Learning',
+                 darknessDesc: 'Reflect on our learning journey, organize what we learned and felt, and prepare for the next step.',
                  fruitTitle: 'Harvest - Essay Writing & Sharing',
+                 reportTitle: '📊 Final Report',
+                 reportDesc: 'View all your work from every stage at a glance.',
                  // Manual modal
                  manualTitle: 'Hong-Dang-Mu Manual',
                  manualLight: '1. Light (Inspiration)',
@@ -4264,7 +4590,7 @@
              const startBtn = document.getElementById('start-from-modal-button');
              if (startBtn) startBtn.textContent = t.start;
 
-             // Nav buttons (now only 6)
+             // Nav buttons
              const navButtons = document.querySelectorAll('.nav-button span');
              navButtons.forEach((span, idx) => {
                  const btnKey = ['home', 'light', 'mirror', 'window', 'door', 'darkness'][idx];
@@ -4282,7 +4608,7 @@
                      const icon = fruitBtn.querySelector('i');
                      fruitBtn.innerHTML = '';
                      if (icon) fruitBtn.appendChild(icon);
-                     fruitBtn.appendChild(document.createTextNode(lang === 'kor' ? '열매맺기' : 'Harvest'));
+                     fruitBtn.appendChild(document.createTextNode(t.fruit + (lang === 'kor' ? '맺기' : '')));
                  }
                  if (dictBtn) {
                      const icon = dictBtn.querySelector('i');
@@ -4294,28 +4620,46 @@
                      const icon = reportBtn.querySelector('i');
                      reportBtn.innerHTML = '';
                      if (icon) reportBtn.appendChild(icon);
-                     reportBtn.appendChild(document.createTextNode(lang === 'kor' ? '보고서' : 'Report'));
+                     reportBtn.appendChild(document.createTextNode(t.report));
                  }
              }
 
-             // Tab titles in main content
+             // Tab titles and descriptions in main content
              const lightTitle = document.querySelector('#content-light h2');
              if (lightTitle) lightTitle.textContent = t.lightTitle;
+             
+             const lightDesc = document.querySelector('#content-light > p');
+             if (lightDesc) lightDesc.textContent = t.lightDesc;
 
              const mirrorTitle = document.querySelector('#content-mirror h2');
              if (mirrorTitle) mirrorTitle.textContent = t.mirrorTitle;
+             
+             const mirrorDesc = document.querySelector('#content-mirror > p');
+             if (mirrorDesc) mirrorDesc.textContent = t.mirrorDesc;
 
              const windowTitle = document.querySelector('#content-window h2');
              if (windowTitle) windowTitle.textContent = t.windowTitle;
+             
+             const windowDesc = document.querySelector('#content-window > p');
+             if (windowDesc) windowDesc.textContent = t.windowDesc;
 
              const doorTitle = document.querySelector('#content-door h2');
              if (doorTitle) doorTitle.textContent = t.doorTitle;
 
              const darknessTitle = document.querySelector('#content-darkness h2');
              if (darknessTitle) darknessTitle.textContent = t.darknessTitle;
+             
+             const darknessDesc = document.querySelector('#content-darkness > p');
+             if (darknessDesc) darknessDesc.textContent = t.darknessDesc;
 
              const fruitTitle = document.querySelector('#content-fruit h2');
              if (fruitTitle) fruitTitle.textContent = t.fruitTitle;
+             
+             const reportTitle = document.querySelector('#content-report h2');
+             if (reportTitle) reportTitle.textContent = t.reportTitle;
+             
+             const reportDesc = document.querySelector('#content-report > p');
+             if (reportDesc) reportDesc.textContent = t.reportDesc;
 
              // Manual modal
              const manualTitle = document.querySelector('#manual-modal h2');
@@ -4387,7 +4731,7 @@
              if (devDesc4) devDesc4.textContent = t.developerDesc4;
 
              // Footer
-             const footerLink = document.querySelector('footer a');
+             const footerLink = document.querySelector('nav a');
              if (footerLink) footerLink.textContent = t.footer;
          }
 
@@ -4573,10 +4917,37 @@
              if (povNeed) document.getElementById('report-pov-need').textContent = povNeed.value || '-';
              if (povReason) document.getElementById('report-pov-reason').textContent = povReason.value || '-';
 
+             // 2단계 추가 항목
+             const reportNeeds = document.getElementById('report-needs');
+             const needsInput = document.getElementById('empathy-needs');
+             if (reportNeeds && needsInput) reportNeeds.textContent = needsInput.value || '-';
+
+             const emotionSlider = document.getElementById('emotion-slider');
+             const emotionName = document.getElementById('emotion-name');
+             const reportEmotionSlider = document.getElementById('report-emotion-slider');
+             if (reportEmotionSlider && emotionSlider && emotionName) {
+                 const emotionText = emotionName.value.trim() || '(감정 미입력)';
+                 reportEmotionSlider.textContent = `${emotionText} ${emotionSlider.value}%`;
+             }
+
+             const myExperienceInput = document.getElementById('empathy-action'); // Assuming experience is linked to action input for now
+             const reportMyExperience = document.getElementById('report-my-experience');
+             if (reportMyExperience && myExperienceInput) reportMyExperience.textContent = myExperienceInput.value || '-';
+
+             // Update POV sentence in report
+             const reportPovSentence = document.getElementById('report-pov-sentence');
+             if (reportPovSentence && povCharacterNameInput && povNeedInput && povReasonInput) {
+                 const character = povCharacterNameInput.value.trim() || '[인물]';
+                 const need = povNeedInput.value.trim() || '[필요한 것]';
+                 const reason = povReasonInput.value.trim() || '[이유/생각]';
+                 reportPovSentence.textContent = `${character}은(는) ${need}을(를) 필요로 한다. 왜냐하면 ${reason}`;
+             }
+
+
              // 3단계: 창문
              const hmwUser = document.getElementById('window-hmw-user');
              const hmwNeed = document.getElementById('window-hmw-need');
-             const hmwText = `우리는 어떻게 하면 ${hmwUser?.value || '[사용자]'}이/가 ${hmwNeed?.value || '[원하는 것]'}할 수 있을까?`;
+             const hmwText = `우리는 어떻게 하면 ${hmwUser?.value.trim() || '[사용자]'}이/가 ${hmwNeed?.value.trim() || '[원하는 것]'}할 수 있을까?`;
              document.getElementById('report-hmw').textContent = hmwText;
 
              const ideaBubbles = document.querySelectorAll('#idea-bubble-list-container .post-it-bubble');
@@ -4615,7 +4986,7 @@
              // 각 유형별 데이터 수집 및 표시
              // 스케치 - 캔버스에 실제 그려진 내용이 있는지 확인
              const canvas = document.getElementById('sketch-canvas');
-             const sketchDesc = document.querySelector('#prototype-content-sketch textarea');
+             const sketchDescTextarea = document.querySelector('#prototype-content-sketch textarea'); // Corrected selector
              let hasSketchContent = false;
 
              if (canvas) {
@@ -4634,7 +5005,7 @@
                  }
              }
 
-             if (hasSketchContent || (sketchDesc && sketchDesc.value.trim())) {
+             if (hasSketchContent || (sketchDescTextarea && sketchDescTextarea.value.trim())) { // Check sketch description textarea
                  createdTypes.push('스케치');
                  const section = document.getElementById('report-sketch-section');
                  const container = document.getElementById('report-sketch-canvas-container');
@@ -4649,7 +5020,7 @@
                      }
                      const descEl = document.getElementById('report-sketch-description');
                      if (descEl) {
-                         descEl.textContent = (sketchDesc && sketchDesc.value.trim()) ? sketchDesc.value : (hasSketchContent ? '(설명 없음)' : '-');
+                         descEl.textContent = (sketchDescTextarea && sketchDescTextarea.value.trim()) ? sketchDescTextarea.value : (hasSketchContent ? '(설명 없음)' : '-');
                      }
                  }
              } else {
@@ -4777,6 +5148,15 @@
              if (feedbackQuestion) document.getElementById('report-feedback-question').textContent = feedbackQuestion.value || '-';
              if (feedbackIdea) document.getElementById('report-feedback-idea').textContent = feedbackIdea.value || '-';
 
+             // 좋·아·바 포스트잇
+             const feedbackLike = document.getElementById('feedback-like');
+             const feedbackLack = document.getElementById('feedback-lack');
+             const feedbackWish = document.getElementById('feedback-wish');
+
+             if (feedbackLike) document.getElementById('report-feedback-like').textContent = feedbackLike.value || '-';
+             if (feedbackLack) document.getElementById('report-feedback-lack').textContent = feedbackLack.value || '-';
+             if (feedbackWish) document.getElementById('report-feedback-wish').textContent = feedbackWish.value || '-';
+
              // 5단계: 어둠
              const learned = document.getElementById('reflection-learned');
              const felt = document.getElementById('reflection-felt');
@@ -4832,6 +5212,10 @@
                  `상황: ${document.getElementById('report-situation')?.textContent || '-'}`,
                  `말: ${document.getElementById('report-speech')?.textContent || '-'}`,
                  `행동: ${document.getElementById('report-action')?.textContent || '-'}`,
+                 '',
+                 `니즈: ${document.getElementById('report-needs')?.textContent || '-'}`,
+                 `감정 슬라이더: ${document.getElementById('report-emotion-slider')?.textContent || '-'}`,
+                 `나의 경험: ${document.getElementById('report-my-experience')?.textContent || '-'}`,
                  '',
                  `필요한 것: ${document.getElementById('report-pov-need')?.textContent || '-'}`,
                  `이유: ${document.getElementById('report-pov-reason')?.textContent || '-'}`,
@@ -4896,6 +5280,11 @@
                  `  개선할 점: ${document.getElementById('report-feedback-delta')?.textContent || '-'}`,
                  `  궁금한 점: ${document.getElementById('report-feedback-question')?.textContent || '-'}`,
                  `  새 아이디어: ${document.getElementById('report-feedback-idea')?.textContent || '-'}`,
+                 '',
+                 `좋·아·바 포스트잇:`,
+                 `  좋은 점: ${document.getElementById('report-feedback-like')?.textContent || '-'}`,
+                 `  아쉬운 점: ${document.getElementById('report-feedback-lack')?.textContent || '-'}`,
+                 `  바라는 점: ${document.getElementById('report-feedback-wish')?.textContent || '-'}`,
                  '',
                  '■ 5단계: 어둠 (성찰)',
                  '─'.repeat(40),
@@ -5056,8 +5445,20 @@
                        requestAnimationFrame(setupSketchCanvas);
                    }
               }
+
+              // 로컬 스토리지에서 데이터 복원
+              restoreFromLocalStorage();
+              
+              // 자동 저장 활성화
+              setupAutoSave();
+
+              // 페이지 이탈 전 저장
+              window.addEventListener('beforeunload', () => {
+                  saveToLocalStorage();
+              });
          });
 
     </script>
 </body>
 </html>
+</replit_final_file>
