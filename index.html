@@ -2017,6 +2017,9 @@
                         <button id="export-copy-btn" class="inline-flex items-center gap-2 bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-lg transition-colors shadow-lg">
                             <i data-lucide="copy" class="w-5 h-5"></i> 복사하기
                         </button>
+                        <button id="reset-all-btn" class="inline-flex items-center gap-2 bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition-colors shadow-lg">
+                            <i data-lucide="rotate-ccw" class="w-5 h-5"></i> 초기화
+                        </button>
                     </div>
                     <div id="export-success-msg" class="text-center text-green-600 font-semibold mt-2 hidden">완료되었습니다!</div>
                 </div>
@@ -5051,6 +5054,23 @@
          }
 
          // --- End of new functionality ---
+
+         // --- Reset All Functionality ---
+         const resetAllBtn = document.getElementById('reset-all-btn');
+         if (resetAllBtn) {
+             resetAllBtn.addEventListener('click', () => {
+                 const confirmReset = confirm('⚠️ 경고: 작성한 모든 내용이 삭제됩니다.\n정말로 초기화하시겠습니까?');
+                 if (confirmReset) {
+                     // Clear localStorage
+                     localStorage.removeItem(STORAGE_KEY);
+                     localStorage.removeItem('language');
+                     localStorage.removeItem('darkMode');
+                     
+                     // Reload page to reset everything
+                     window.location.reload();
+                 }
+             });
+         }
 
          // --- 보고서 기능 ---
          
