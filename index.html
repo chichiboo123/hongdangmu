@@ -927,7 +927,14 @@
         <!-- 시작 페이지 -->
         <div id="home-page" class="text-center flex flex-col items-center justify-center py-8 animate-fade-in">
             <div class="mb-4 animate-bounce">
-                <img src="https://i.ibb.co/KpyPT913/Chat-GPT-Image-2025-10-24-01-41-59.png" alt="홍당뮤 캐릭터" class="w-32 h-32 md:w-48 md:h-48 mx-auto">
+                <img 
+                    id="home-character-img"
+                    src="https://i.ibb.co/KpyPT913/Chat-GPT-Image-2025-10-24-01-41-59.png" 
+                    alt="홍당뮤 캐릭터" 
+                    class="w-32 h-32 md:w-48 md:h-48 mx-auto hidden"
+                    onload="this.classList.remove('hidden'); document.getElementById('home-character-placeholder').classList.add('hidden');"
+                    onerror="this.style.display='none';">
+                <div id="home-character-placeholder" class="text-8xl md:text-9xl">🥕</div>
             </div>
             <h2 class="grandiflora text-3xl md:text-4xl font-bold text-orange-500">홍당뮤에 온 걸 환영해!</h2>
             <p id="hongik-text" class="text-gray-700 font-bold mt-3 mb-8 text-base md:text-lg cursor-pointer hover:text-orange-600 transition-colors">홍익인간 = 당신의 생각 + 뮤지컬</p>
