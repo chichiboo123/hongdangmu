@@ -27,6 +27,11 @@
             background-color: #FEFBF6; /* 따뜻한 크림색 배경 */
             padding-bottom: 0; /* 기본값 초기화, 나중에 스크립트 전에 재설정 */
         }
+        html.no-scroll,
+        body.no-scroll {
+            overflow: hidden;
+            height: 100vh;
+        }
         .grandiflora {
             font-family: 'Grandiflora One', cursive;
         }
@@ -901,6 +906,12 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L9 8m4-4v12"/>
             </svg>
         </button>
+        <!-- Report Button -->
+        <button id="report-quick-access" class="control-btn" title="보고서 / Report">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+        </button>
     </div>
     <input type="file" id="backup-file-input" accept="application/json" style="display: none;">
 
@@ -919,28 +930,28 @@
         </header>
 
         <!-- 시작 페이지 -->
-        <div id="home-page" class="text-center flex flex-col items-center justify-center py-16 animate-fade-in">
+        <div id="home-page" class="text-center flex flex-col items-center justify-center py-8 animate-fade-in">
             <div class="mb-8 animate-bounce">
-                <img src="https://i.ibb.co/jP4NnLp1/Chat-GPT-Image-2025-10-24-01-41-59.png" alt="홍당뮤 캐릭터" class="w-48 h-48 md:w-64 md:h-64 mx-auto">
+                <img src="https://i.ibb.co/jP4NnLp1/Chat-GPT-Image-2025-10-24-01-41-59.png" alt="홍당뮤 캐릭터" class="w-32 h-32 md:w-48 md:h-48 mx-auto">
             </div>
-            <h2 class="grandiflora text-4xl font-bold text-orange-500">홍당뮤에 온 걸 환영해!</h2>
-            <p class="text-gray-700 font-bold mt-4 mb-8 text-lg"><span id="hongik-ingan" class="cursor-pointer hover:text-orange-600 underline decoration-dotted">홍익인간</span> = 당신의 생각 + 뮤지컬</p>
-            <button id="manual-button" class="bg-orange-400 hover:bg-orange-500 text-white font-bold text-xl px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 inline-flex items-center gap-2 mb-6">
+            <h2 class="grandiflora text-3xl md:text-4xl font-bold text-orange-500 mt-2 mb-3">홍당뮤에 온 걸 환영해!</h2>
+            <p id="hongik-text" class="text-gray-700 font-bold mb-8 text-base md:text-lg cursor-pointer hover:text-orange-600 transition-colors">홍익인간 = 당신의 생각 + 뮤지컬</p>
+            <button id="manual-button" class="bg-orange-400 hover:bg-orange-500 text-white font-bold text-lg md:text-xl px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 inline-flex items-center gap-2 mb-6">
                 설명서 📖
             </button>
 
             <!-- Additional Navigation Buttons -->
-            <div class="flex flex-wrap gap-4 justify-center mt-4">
-                <button data-tab="fruit" class="extra-nav-button bg-red-100 hover:bg-red-200 text-red-700 font-bold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 inline-flex items-center gap-2">
-                    <i data-lucide="apple" class="w-5 h-5"></i>
+            <div class="flex flex-wrap gap-3 justify-center mb-8">
+                <button data-tab="fruit" class="extra-nav-button bg-red-100 hover:bg-red-200 text-red-700 font-bold py-2.5 px-5 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 inline-flex items-center gap-2">
+                    <i data-lucide="apple" class="w-4 h-4"></i>
                     열매맺기
                 </button>
-                <button data-tab="dictionary" class="extra-nav-button bg-teal-100 hover:bg-teal-200 text-teal-700 font-bold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 inline-flex items-center gap-2">
-                    <i data-lucide="book-marked" class="w-5 h-5"></i>
+                <button data-tab="dictionary" class="extra-nav-button bg-teal-100 hover:bg-teal-200 text-teal-700 font-bold py-2.5 px-5 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 inline-flex items-center gap-2">
+                    <i data-lucide="book-marked" class="w-4 h-4"></i>
                     생각사전
                 </button>
-                <button data-tab="report" class="extra-nav-button bg-purple-100 hover:bg-purple-200 text-purple-700 font-bold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 inline-flex items-center gap-2">
-                    <i data-lucide="file-bar-chart" class="w-5 h-5"></i>
+                <button data-tab="report" class="extra-nav-button bg-purple-100 hover:bg-purple-200 text-purple-700 font-bold py-2.5 px-5 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 inline-flex items-center gap-2">
+                    <i data-lucide="file-bar-chart" class="w-4 h-4"></i>
                     보고서
                 </button>
             </div>
@@ -2012,16 +2023,22 @@
         </main>
     </div>
 
-    <!-- 홍익인간 의미 모달 -->
-    <div id="hongik-modal" class="fixed inset-0 bg-black bg-opacity-60 z-[100] items-center justify-center p-4 animate-fade-in" style="display: none;">
+    
+
+    <!-- 홍익인간 설명 모달 -->
+    <div id="hongik-modal" class="fixed inset-0 bg-black bg-opacity-60 z-[100] hidden items-center justify-center p-4 animate-fade-in">
         <div class="bg-white rounded-2xl shadow-xl max-w-md w-full p-6 md:p-8 relative">
             <button id="close-hongik-modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700">
                 <i data-lucide="x" class="w-6 h-6"></i>
             </button>
             <h2 class="text-2xl font-bold text-orange-500 text-center mb-4">홍익인간 (弘益人間)</h2>
-            <div class="text-gray-700 leading-relaxed">
-                <p class="mb-4">널리 인간을 이롭게 함. 단군의 건국 이념으로서 우리나라 정치, 교육, 문화의 최고 이념이다. ≪삼국유사≫ 고조선 건국 신화에 나온다.</p>
-                <p class="mt-4 text-right">출처: 국립국어원 표준국어대사전</p>
+            <div class="space-y-4 text-left text-gray-700">
+                <p class="leading-relaxed">
+                    널리 인간을 이롭게 함. 단군의 건국 이념으로서 우리나라 정치, 교육, 문화의 최고 이념이다. ≪삼국유사≫ 고조선 건국 신화에 나온다.
+                </p>
+                <p class="text-sm text-gray-500 text-right">
+                    출처: 국립국어원 표준국어대사전
+                </p>
             </div>
         </div>
     </div>
@@ -2239,6 +2256,11 @@
         const modal = document.getElementById('manual-modal');
         const closeModalButton = document.getElementById('close-modal-button');
         const startFromModalButton = document.getElementById('start-from-modal-button');
+
+        // 홍익인간 모달 관련 요소
+        const hongikText = document.getElementById('hongik-text');
+        const hongikModal = document.getElementById('hongik-modal');
+        const closeHongikModal = document.getElementById('close-hongik-modal');
 
         const navContainer = document.querySelector('nav');
         const allNavButtons = document.querySelectorAll('.nav-button');
@@ -2545,43 +2567,22 @@
          let resizeHandleType = ''; // e.g., 'bottom-right'
          let initialResizeInfo = {}; // Store initial pos/size during resize
 
-        // --- 홍익인간 모달 기능 ---
-        // DOMContentLoaded 후 실행되도록 함수로 래핑
-        function setupHongikModal() {
-            const hongikInganSpan = document.getElementById('hongik-ingan');
-            const hongikModal = document.getElementById('hongik-modal');
-            const closeHongikModal = document.getElementById('close-hongik-modal');
-
-            if (hongikInganSpan && hongikModal) {
-                hongikInganSpan.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    hongikModal.style.display = 'flex';
-                });
-            }
-
-            if (closeHongikModal && hongikModal) {
-                closeHongikModal.addEventListener('click', () => {
-                    hongikModal.style.display = 'none';
-                });
-            }
-
-            if (hongikModal) {
-                hongikModal.addEventListener('click', (e) => {
-                    if (e.target === hongikModal) {
-                        hongikModal.style.display = 'none';
-                    }
-                });
-            }
-        }
-
-        // 페이지 로드 후 홍익인간 모달 설정
-        setupHongikModal();
+        
 
         // --- Core Functions ---
 
         function showPage(pageName) {
             if (homePage) homePage.classList.toggle('hidden', pageName !== 'home');
             if (mainContent) mainContent.classList.toggle('hidden', pageName === 'home');
+            
+            // 홈 페이지일 때만 스크롤 방지
+            if (pageName === 'home') {
+                document.documentElement.classList.add('no-scroll');
+                document.body.classList.add('no-scroll');
+            } else {
+                document.documentElement.classList.remove('no-scroll');
+                document.body.classList.remove('no-scroll');
+            }
         }
 
          // Function to hide controls
@@ -2684,6 +2685,37 @@
              if(modal) modal.classList.add('hidden');
              if(modal) modal.classList.remove('flex');
         };
+
+        // 홍익인간 모달 열기/닫기 함수
+        const openHongikModal = () => {
+            if(hongikModal) {
+                hongikModal.classList.remove('hidden');
+                hongikModal.classList.add('flex');
+                renderIcons(); // 아이콘 렌더링
+            }
+        };
+
+        const closeHongikModalFunc = () => {
+            if(hongikModal) {
+                hongikModal.classList.add('hidden');
+                hongikModal.classList.remove('flex');
+            }
+        };
+
+        // 홍익인간 모달 이벤트 리스너
+        if (hongikText) {
+            hongikText.addEventListener('click', openHongikModal);
+        }
+        if (closeHongikModal) {
+            closeHongikModal.addEventListener('click', closeHongikModalFunc);
+        }
+        if (hongikModal) {
+            hongikModal.addEventListener('click', (e) => {
+                if (e.target === hongikModal) {
+                    closeHongikModalFunc();
+                }
+            });
+        }
 
         // Event Listeners for Modal
          if (manualButton) manualButton.addEventListener('click', openModal);
@@ -3603,11 +3635,28 @@
                    element.style.height = data.style.height || 'auto'; // Default auto height
                    img.style.pointerEvents = 'none'; // Ensure img doesn't block drag/resize
                    element.appendChild(img);
-              }
-               else {
+              } else if (data.type === 'text') {
                   element = document.createElement('div');
-                   element.className = `app-element ${data.type}-element`;
-                   element.textContent = data.content;
+                  element.className = 'app-element text-element font-noto-sans-kr';
+                  element.textContent = data.content;
+                  element.setAttribute('contenteditable', 'false'); // 기본값 false로 설정
+                  // Add input listener for continuous save, blur for final save
+                  element.addEventListener('input', saveCurrentPageState);
+                  element.addEventListener('blur', () => {
+                      // 포커스를 잃으면 contenteditable 비활성화
+                      if (element.dataset.type === 'text') {
+                          element.setAttribute('contenteditable', 'false');
+                      }
+                      saveCurrentPageState();
+                  });
+              } else if (data.type === 'emoji') {
+                  element = document.createElement('div');
+                  element.className = 'app-element emoji-element';
+                  element.textContent = data.content;
+              } else {
+                  element = document.createElement('div');
+                  element.className = `app-element ${data.type}-element`;
+                  element.textContent = data.content;
               }
                element.dataset.id = data.id;
                element.dataset.type = data.type;
@@ -3631,14 +3680,6 @@
                     // Add other shapes if implemented
                 }
 
-
-               if(data.type === 'text') {
-                  element.setAttribute('contenteditable', 'true');
-                  // Add input listener for continuous save, blur for final save
-                  element.addEventListener('input', saveCurrentPageState);
-                  element.addEventListener('blur', saveCurrentPageState);
-               }
-
               makeElementDraggable(element);
                // Use mousedown/touchstart for selection to be consistent with drag/resize start
               element.addEventListener('mousedown', (e) => {
@@ -3648,6 +3689,21 @@
                         selectElement(element);
                    }
               });
+               element.addEventListener('dblclick', (e) => {
+                   e.stopPropagation();
+                   // 텍스트 요소 더블클릭 시 편집 모드 진입
+                   if (element.dataset.type === 'text') {
+                       element.setAttribute('contenteditable', 'true');
+                       element.focus();
+                       // 커서를 텍스트 끝으로 이동
+                       const range = document.createRange();
+                       const sel = window.getSelection();
+                       range.selectNodeContents(element);
+                       range.collapse(false);
+                       sel.removeAllRanges();
+                       sel.addRange(range);
+                   }
+               });
                element.addEventListener('touchstart', (e) => {
                    e.stopPropagation();
                     if (!e.target.classList.contains('resize-handle')) {
@@ -4098,49 +4154,44 @@
                // Exit if resizing has already started from a handle
                if (isResizing || !appDesignScreen) return;
 
-                // Ensure the target is the element itself, not a handle or inner contenteditable area during editing
                const targetHandle = e.target.closest('.resize-handle');
-               const isEditingText = e.target.closest('[contenteditable="true"]') === document.activeElement; // More robust check
+               if (targetHandle) return; // Don't drag if clicking handle
 
-               if (targetHandle || isEditingText) {
-                    // console.log("Drag prevented:", { isResizing, isEditingText }); // Reduce logging
-                   return; // Don't start drag if interacting with handle or editing text
+               selectedElement = e.target.closest('.app-element');
+               if (!selectedElement) return;
+
+               // 텍스트 요소 특별 처리 - 편집 모드일 때만 드래그 방지
+               if (selectedElement.dataset.type === 'text') {
+                   const isEditable = selectedElement.getAttribute('contenteditable') === 'true';
+                   
+                   // 편집 모드인 경우 드래그 시작하지 않음
+                   if (isEditable) {
+                       return;
+                   }
                }
 
-
+               // 드래그 시작 (텍스트 요소가 편집 모드가 아니거나, 다른 요소인 경우)
                isDraggingElement = true;
-               selectedElement = e.target.closest('.app-element');
-               if (!selectedElement) { isDraggingElement = false; return; }
-
-               // Bring dragged element to front temporarily
                selectedElement.style.zIndex = 1000;
                selectedElement.classList.add('dragging');
-               // Select the element visually (might already be selected)
                selectElement(selectedElement);
 
-
-               const rect = selectedElement.getBoundingClientRect();
                const screenRect = appDesignScreen.getBoundingClientRect();
                let clientX, clientY;
 
                if (e.type === 'touchstart') {
-                    if (e.touches.length !== 1) { isDraggingElement = false; return; }
-                    e.preventDefault(); // Prevent scroll while dragging ONLY for touchstart on element
+                   if (e.touches.length !== 1) { isDraggingElement = false; return; }
+                   e.preventDefault();
                    clientX = e.touches[0].clientX;
                    clientY = e.touches[0].clientY;
                } else {
-                   // Prevent default text selection ONLY if NOT contenteditable or not actively editing
-                    if (!selectedElement.isContentEditable || document.activeElement !== selectedElement) {
-                       e.preventDefault();
-                    }
+                   e.preventDefault();
                    clientX = e.clientX;
                    clientY = e.clientY;
                }
 
-               // Calculate offset relative to the element's current top/left style
                dragOffsetX = clientX - screenRect.left - (parseFloat(selectedElement.style.left) || 0);
                dragOffsetY = clientY - screenRect.top - (parseFloat(selectedElement.style.top) || 0);
-
 
                document.addEventListener('mousemove', dragMove);
                document.addEventListener('mouseup', stopDrag);
@@ -4209,12 +4260,32 @@
 
              if (type === 'text') {
                  element = document.createElement('div');
-                 element.className = 'app-element text-element font-noto-sans-kr'; // Add default font class
+                 element.className = 'app-element text-element font-noto-sans-kr';
                  element.textContent = '텍스트 상자';
-                 element.setAttribute('contenteditable', 'true');
-                  element.style.fontFamily = "'Noto Sans KR', sans-serif"; // Default font style
-                  element.addEventListener('input', saveCurrentPageState);
-                  element.addEventListener('blur', saveCurrentPageState);
+                 element.setAttribute('contenteditable', 'false');
+                 element.style.fontFamily = "'Noto Sans KR', sans-serif";
+                 element.style.fontSize = '16px';
+                 element.style.color = '#000000';
+                 element.addEventListener('input', saveCurrentPageState);
+                 element.addEventListener('blur', () => {
+                     if (element.dataset.type === 'text') {
+                         element.setAttribute('contenteditable', 'false');
+                     }
+                     saveCurrentPageState();
+                 });
+                 // 더블클릭으로 편집 모드 진입
+                 element.addEventListener('dblclick', (e) => {
+                     e.stopPropagation();
+                     element.setAttribute('contenteditable', 'true');
+                     element.focus();
+                     // 커서를 텍스트 끝으로 이동
+                     const range = document.createRange();
+                     const sel = window.getSelection();
+                     range.selectNodeContents(element);
+                     range.collapse(false);
+                     sel.removeAllRanges();
+                     sel.addRange(range);
+                 });
              } else if (type === 'emoji') {
                  element = document.createElement('div');
                  element.className = 'app-element emoji-element';
@@ -4236,33 +4307,33 @@
                  img.alt = 'Uploaded Image';
                  img.style.pointerEvents = 'none'; // Prevent img interference
                  element.appendChild(img);
-                  element.style.width = '100px'; // Default image size
-                  element.style.height = 'auto';
+                 element.style.width = '100px'; // Default image size
+                 element.style.height = 'auto';
              }
 
 
              if (element) {
                  element.dataset.id = elementId;
                  element.dataset.type = type;
-                  const existingElements = appDesignScreen.querySelectorAll('.app-element').length;
-                  const initialLeft = 50 + (existingElements * 10) % 150;
-                  const initialTop = 50 + (existingElements * 40) % (appDesignScreen.clientHeight - 100);
+                 const existingElements = appDesignScreen.querySelectorAll('.app-element').length;
+                 const initialLeft = 50 + (existingElements * 10) % 150;
+                 const initialTop = 50 + (existingElements * 40) % (appDesignScreen.clientHeight - 100);
                  element.style.left = `${initialLeft}px`;
                  element.style.top = `${initialTop}px`;
 
                  makeElementDraggable(element);
                  element.addEventListener('mousedown', (e) => {
                      e.stopPropagation();
-                      if (!e.target.classList.contains('resize-handle')) {
-                           selectElement(element);
-                      }
+                     if (!e.target.classList.contains('resize-handle')) {
+                         selectElement(element);
+                     }
                  });
-                  element.addEventListener('touchstart', (e) => {
-                      e.stopPropagation();
-                       if (!e.target.classList.contains('resize-handle')) {
-                           selectElement(element);
-                       }
-                  }, { passive: true }); // Make selection passive
+                 element.addEventListener('touchstart', (e) => {
+                     e.stopPropagation();
+                     if (!e.target.classList.contains('resize-handle')) {
+                         selectElement(element);
+                     }
+                 }, { passive: true }); // Make selection passive
 
                  appDesignScreen.appendChild(element);
                  selectElement(element); // Select the newly added element
@@ -4541,10 +4612,13 @@
 
          // DOMContentLoaded에서 초기화 함수들 호출
          document.addEventListener('DOMContentLoaded', () => {
+             showPage('home');
+             setActiveTab('home');
              renderIcons();
-             setupHongikModal();
              setupAutoSave();
              restoreFromLocalStorage();
+             checkSentenceBoxPlaceholder();
+             console.log('setupHongikModal 완료');
          });
 
         // Call setup for sketch canvas initially if it's the default view
@@ -4969,6 +5043,10 @@
          document.getElementById('backup-download').addEventListener('click', downloadBackup);
          document.getElementById('backup-upload').addEventListener('click', uploadBackup);
          document.getElementById('backup-file-input').addEventListener('change', handleBackupFile);
+         document.getElementById('report-quick-access').addEventListener('click', () => {
+             showPage('main');
+             setActiveTab('report');
+         });
 
          // Load saved preferences
          const savedLang = localStorage.getItem('language');
@@ -5223,13 +5301,21 @@
                  
                  // 3. 주사위 아이디어
                  const diceResult = document.getElementById('dice-result');
-                 if (diceResult && diceResult.textContent.trim() && diceResult.textContent !== '여기에 조합된 아이디어가 나옵니다!' && diceResult.textContent !== '아이디어를 입력하고 주사위를 굴려보세요!') {
+                 const diceText = diceResult ? diceResult.textContent.trim() : '';
+                 // 기본 텍스트나 빈 값이 아닌 경우에만 표시
+                 // "여기에"로 시작하거나 "굴려보세요"가 포함되어 있으면 기본 텍스트로 간주
+                 const isDiceDefault = !diceText || 
+                                      diceText.includes('여기에') || 
+                                      diceText.includes('굴려보세요') ||
+                                      diceText.includes('비어있음');
+                 
+                 if (diceText && !isDiceDefault) {
                      const diceTitle = document.createElement('li');
                      diceTitle.innerHTML = '<strong>🎲 주사위 아이디어:</strong>';
                      reportIdeas.appendChild(diceTitle);
                      
                      const li = document.createElement('li');
-                     li.textContent = `${diceResult.textContent}`;
+                     li.textContent = `${diceText}`;
                      li.style.marginLeft = '1.5rem';
                      reportIdeas.appendChild(li);
                  }
