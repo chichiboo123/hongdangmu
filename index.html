@@ -26,8 +26,6 @@
             font-family: 'Noto Sans KR', sans-serif;
             background-color: #FEFBF6; /* 따뜻한 크림색 배경 */
             padding-bottom: 0; /* 기본값 초기화, 나중에 스크립트 전에 재설정 */
-            -webkit-overflow-scrolling: touch; /* iOS 스크롤 부드럽게 */
-            overscroll-behavior: contain; /* 바운스 효과 제한 */
         }
         html.no-scroll,
         body.no-scroll {
@@ -933,17 +931,17 @@
 
         <!-- 시작 페이지 -->
         <div id="home-page" class="text-center flex flex-col items-center justify-center py-8 animate-fade-in">
-            <div class="mb-8 animate-bounce">
+            <div class="mb-4 animate-bounce">
                 <img src="https://i.ibb.co/jP4NnLp1/Chat-GPT-Image-2025-10-24-01-41-59.png" alt="홍당뮤 캐릭터" class="w-32 h-32 md:w-48 md:h-48 mx-auto">
             </div>
-            <h2 class="grandiflora text-3xl md:text-4xl font-bold text-orange-500 mt-2 mb-3">홍당뮤에 온 걸 환영해!</h2>
-            <p id="hongik-text" class="text-gray-700 font-bold mb-8 text-base md:text-lg cursor-pointer hover:text-orange-600 transition-colors">홍익인간 = 당신의 생각 + 뮤지컬</p>
-            <button id="manual-button" class="bg-orange-400 hover:bg-orange-500 text-white font-bold text-lg md:text-xl px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 inline-flex items-center gap-2 mb-6">
+            <h2 class="grandiflora text-3xl md:text-4xl font-bold text-orange-500">홍당뮤에 온 걸 환영해!</h2>
+            <p id="hongik-text" class="text-gray-700 font-bold mt-3 mb-8 text-base md:text-lg cursor-pointer hover:text-orange-600 transition-colors">홍익인간 = 당신의 생각 + 뮤지컬</p>
+            <button id="manual-button" class="bg-orange-400 hover:bg-orange-500 text-white font-bold text-lg md:text-xl px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 inline-flex items-center gap-2 mb-4">
                 설명서 📖
             </button>
 
             <!-- Additional Navigation Buttons -->
-            <div class="flex flex-wrap gap-3 justify-center mb-8">
+            <div class="flex flex-wrap gap-3 justify-center mt-4">
                 <button data-tab="fruit" class="extra-nav-button bg-red-100 hover:bg-red-200 text-red-700 font-bold py-2.5 px-5 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 inline-flex items-center gap-2">
                     <i data-lucide="apple" class="w-4 h-4"></i>
                     열매맺기
@@ -2173,27 +2171,27 @@
         <div class="max-w-xl mx-auto">
             <!-- 네비게이션 버튼들 -->
             <div class="flex justify-around items-center h-16 pt-2">
-                <button data-page="home" class="nav-button home-button flex flex-col items-center justify-center gap-1 transition-all flex-1 min-h-[48px] active:bg-gray-100">
+                <button data-page="home" class="nav-button home-button flex flex-col items-center justify-center gap-1 transition-all w-16 min-h-[48px]">
                      <i data-lucide="home" class="w-6 h-6"></i>
                      <span class="text-xs font-bold">홈</span>
                 </button>
-                <button data-tab="light" class="nav-button tab-button flex flex-col items-center justify-center gap-1 transition-all flex-1 min-h-[48px] active:bg-gray-100">
+                <button data-tab="light" class="nav-button tab-button flex flex-col items-center justify-center gap-1 transition-all w-16 min-h-[48px]">
                     <i data-lucide="lightbulb" class="w-6 h-6"></i>
                     <span class="text-xs font-bold">빛</span>
                 </button>
-                <button data-tab="mirror" class="nav-button tab-button flex flex-col items-center justify-center gap-1 transition-all flex-1 min-h-[48px] active:bg-gray-100">
+                <button data-tab="mirror" class="nav-button tab-button flex flex-col items-center justify-center gap-1 transition-all w-16 min-h-[48px]">
                     <i data-lucide="user-square" class="w-6 h-6"></i>
                     <span class="text-xs font-bold">거울</span>
                 </button>
-                <button data-tab="window" class="nav-button tab-button flex flex-col items-center justify-center gap-1 transition-all flex-1 min-h-[48px] active:bg-gray-100">
+                <button data-tab="window" class="nav-button tab-button flex flex-col items-center justify-center gap-1 transition-all w-16 min-h-[48px]">
                     <i data-lucide="search" class="w-6 h-6"></i>
                     <span class="text-xs font-bold">창문</span>
                 </button>
-                <button data-tab="door" class="nav-button tab-button flex flex-col items-center justify-center gap-1 transition-all flex-1 min-h-[48px] active:bg-gray-100">
+                <button data-tab="door" class="nav-button tab-button flex flex-col items-center justify-center gap-1 transition-all w-16 min-h-[48px]">
                     <i data-lucide="hammer" class="w-6 h-6"></i>
                     <span class="text-xs font-bold">문</span>
                 </button>
-                <button data-tab="darkness" class="nav-button tab-button flex flex-col items-center justify-center gap-1 transition-all flex-1 min-h-[48px] active:bg-gray-100">
+                <button data-tab="darkness" class="nav-button tab-button flex flex-col items-center justify-center gap-1 transition-all w-16 min-h-[48px]">
                     <i data-lucide="book-open" class="w-6 h-6"></i>
                     <span class="text-xs font-bold">어둠</span>
                 </button>
@@ -2212,9 +2210,7 @@
         /* 네비게이션 높이에 맞춰 body 하단 여백 조정 */
         body {
             padding-bottom: 110px; /* 네비게이션 + footer 텍스트 높이 */
-            -webkit-text-size-adjust: 100%; /* 모바일 텍스트 자동 조정 방지 */
-            -moz-text-size-adjust: 100%;
-            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%; /* 모바일 텍스트 자동 확대 방지 */
         }
 
         /* 모바일 최적화 */
@@ -2224,46 +2220,15 @@
                 padding-right: 1rem;
             }
 
-            /* 터치 영역 최소 크기 보장 (Apple HIG 권장: 44x44px) */
-            button, .emoji-btn, .nav-button, 
-            .control-btn, .prototype-btn, 
-            .scamper-trigger, .timer-control-btn {
+            /* 터치 영역 최소 크기 보장 */
+            button, .emoji-btn, .nav-button {
                 min-height: 44px;
                 min-width: 44px;
-                -webkit-tap-highlight-color: transparent;
             }
 
             /* 입력 필드 줌 방지 */
             input, textarea, select {
                 font-size: 16px !important;
-            }
-
-            /* 네비게이션 바 터치 영역 개선 */
-            .nav-button {
-                padding: 0.5rem;
-                gap: 0.25rem;
-            }
-
-            .nav-button i {
-                width: 24px;
-                height: 24px;
-            }
-
-            /* 컨텐츠 카드 여백 조정 */
-            .content-card {
-                padding: 1rem;
-            }
-
-            /* 모달 최적화 */
-            #manual-modal .bg-white,
-            #hongik-modal .bg-white {
-                max-height: 85vh;
-                overflow-y: auto;
-            }
-
-            /* 상단 컨트롤 버튼 간격 조정 */
-            .top-controls {
-                gap: 0.5rem;
             }
         }
 
@@ -2277,83 +2242,8 @@
                 font-size: 1.25rem !important;
             }
 
-            h3 {
-                font-size: 1.1rem !important;
-            }
-
             .nav-button span {
                 font-size: 0.65rem;
-            }
-
-            /* 네비게이션 아이콘 크기 조정 */
-            .nav-button i {
-                width: 20px;
-                height: 20px;
-            }
-
-            /* 컨텐츠 카드 여백 축소 */
-            .content-card {
-                padding: 0.75rem;
-            }
-
-            /* 버튼 텍스트 크기 조정 */
-            button {
-                font-size: 14px;
-            }
-
-            /* 상단 컨트롤 최소화 */
-            .top-controls {
-                gap: 0.3rem;
-            }
-
-            .control-btn {
-                padding: 0.4rem;
-            }
-
-            .control-btn svg {
-                width: 16px;
-                height: 16px;
-            }
-        }
-
-        /* 매우 작은 화면 (가로 모드 대응) */
-        @media (max-width: 375px) {
-            h1 {
-                font-size: 2rem !important;
-            }
-
-            .nav-button span {
-                font-size: 0.6rem;
-            }
-
-            /* 푸터 텍스트 크기 조정 */
-            nav a {
-                font-size: 0.75rem;
-            }
-        }
-
-        /* 가로 모드 최적화 */
-        @media (max-height: 500px) and (orientation: landscape) {
-            body {
-                padding-bottom: 90px;
-            }
-
-            nav {
-                padding-top: 0.25rem;
-                padding-bottom: 0.25rem;
-            }
-
-            .nav-button {
-                padding: 0.25rem;
-            }
-
-            .nav-button i {
-                width: 20px;
-                height: 20px;
-            }
-
-            .nav-button span {
-                font-size: 0.6rem;
             }
         }
     </style>
