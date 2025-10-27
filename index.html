@@ -924,7 +924,7 @@
                 <img src="https://i.ibb.co/jP4NnLp1/Chat-GPT-Image-2025-10-24-01-41-59.png" alt="홍당뮤 캐릭터" class="w-48 h-48 md:w-64 md:h-64 mx-auto">
             </div>
             <h2 class="grandiflora text-4xl font-bold text-orange-500">홍당뮤에 온 걸 환영해!</h2>
-            <p class="text-gray-700 font-bold mt-4 mb-8 text-lg">홍익인간 = 당신의 생각 + 뮤지컬</p>
+            <p class="text-gray-700 font-bold mt-4 mb-8 text-lg"><span id="hongik-ingan" class="cursor-pointer hover:text-orange-600 underline decoration-dotted">홍익인간</span> = 당신의 생각 + 뮤지컬</p>
             <button id="manual-button" class="bg-orange-400 hover:bg-orange-500 text-white font-bold text-xl px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 inline-flex items-center gap-2 mb-6">
                 설명서 📖
             </button>
@@ -1379,6 +1379,7 @@
                 <!-- 4. 미닫이문 (제작) 콘텐츠 -->
                 <div id="content-door" class="tab-content space-y-6 hidden animate-fade-in">
                      <h2 class="text-2xl font-bold text-emerald-500">[4단계 미닫이문] 세상으로 나아가다</h2>
+                     <p class="text-gray-600">여러분의 아이디어를 눈에 보이게 만들어 테스트해보세요.</p>
 
                     <!-- '프로토타입' / '테스트' 서브 탭 네비게이션 -->
                     <div class="border-b border-gray-200">
@@ -1760,7 +1761,48 @@
 
                     <!-- 작성자 표시 -->
                     <div class="content-card p-3 rounded-xl shadow-sm bg-purple-50">
-                        <p class="text-sm text-gray-700">보고서 작성자: <span id="report-author-display" class="font-semibold text-purple-700">-</span></p>
+                        <p class="text-sm text-gray-700">보고서 작성자: <span id="report-author-display" class="font-semibold text-purple-700">작성자 이름을 입력하세요</span></p>
+                    </div>
+
+                    <!-- 단계별 선택 내보내기 -->
+                    <div class="content-card p-4 rounded-xl shadow-sm">
+                        <h3 class="text-lg font-bold text-purple-600 mb-3">📋 내보내기 단계 선택</h3>
+                        <p class="text-sm text-gray-600 mb-4">원하는 단계만 선택하여 내보낼 수 있습니다.</p>
+                        
+                        <div class="space-y-2">
+                            <!-- 전체 선택 -->
+                            <label class="flex items-center gap-2 p-2 hover:bg-purple-50 rounded cursor-pointer">
+                                <input type="checkbox" id="export-select-all" class="w-4 h-4" checked>
+                                <span class="font-semibold text-purple-700">전체 선택</span>
+                            </label>
+                            <hr class="border-purple-200">
+                            
+                            <!-- 개별 단계 -->
+                            <label class="flex items-center gap-2 p-2 hover:bg-purple-50 rounded cursor-pointer">
+                                <input type="checkbox" class="export-step-checkbox w-4 h-4" id="export-step-light" checked>
+                                <span>💡 1단계: 빛 (영감)</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-2 hover:bg-purple-50 rounded cursor-pointer">
+                                <input type="checkbox" class="export-step-checkbox w-4 h-4" id="export-step-mirror" checked>
+                                <span>🪞 2단계: 거울 (공감/정의)</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-2 hover:bg-purple-50 rounded cursor-pointer">
+                                <input type="checkbox" class="export-step-checkbox w-4 h-4" id="export-step-window" checked>
+                                <span>🪟 3단계: 창문 (재정의/아이디어)</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-2 hover:bg-purple-50 rounded cursor-pointer">
+                                <input type="checkbox" class="export-step-checkbox w-4 h-4" id="export-step-door" checked>
+                                <span>🚪 4단계: 미닫이문 (프로토타입/테스트)</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-2 hover:bg-purple-50 rounded cursor-pointer">
+                                <input type="checkbox" class="export-step-checkbox w-4 h-4" id="export-step-dark" checked>
+                                <span>🌑 5단계: 어둠 (성찰)</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-2 hover:bg-purple-50 rounded cursor-pointer">
+                                <input type="checkbox" class="export-step-checkbox w-4 h-4" id="export-step-fruit" checked>
+                                <span>🍎 열매맺기 (논술)</span>
+                            </label>
+                        </div>
                     </div>
 
                     <div id="report-content" class="content-card p-8 rounded-xl shadow-sm space-y-8">
@@ -1968,6 +2010,20 @@
 
             </div>
         </main>
+    </div>
+
+    <!-- 홍익인간 의미 모달 -->
+    <div id="hongik-modal" class="fixed inset-0 bg-black bg-opacity-60 z-[100] hidden items-center justify-center p-4 animate-fade-in">
+        <div class="bg-white rounded-2xl shadow-xl max-w-md w-full p-6 md:p-8 relative">
+            <button id="close-hongik-modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <h2 class="text-2xl font-bold text-orange-500 text-center mb-4">홍익인간 (弘益人間)</h2>
+            <div class="text-gray-700 leading-relaxed">
+                <p class="mb-4">널리 인간을 이롭게 함. 단군의 건국 이념으로서 우리나라 정치, 교육, 문화의 최고 이념이다. ≪삼국유사≫ 고조선 건국 신화에 나온다.</p>
+                <p class="mt-4 text-right">출처: 국립국어원 표준국어대사전</p>
+            </div>
+        </div>
     </div>
 
     <!-- 설명서 모달 -->
@@ -2199,7 +2255,7 @@
         // 저장할 필드 목록
         function getAllFormFields() {
             const fields = {};
-            
+
             // 모든 input, textarea, select 요소 수집
             document.querySelectorAll('input[type="text"], input[type="number"], input[type="color"], input[type="range"], textarea, select').forEach(el => {
                 if (el.id && el.id !== 'backup-file-input' && el.id !== 'image-upload-input') {
@@ -2272,7 +2328,7 @@
                 // 일반 필드 복원
                 Object.keys(fields).forEach(id => {
                     if (id === 'questions' || id === 'ideas' || id === 'reflection-emojis' || id === 'appPages') return;
-                    
+
                     const el = document.getElementById(id);
                     if (el && fields[id]) {
                         el.value = fields[id];
@@ -2289,12 +2345,12 @@
                     const questions = JSON.parse(fields['questions']);
                     const questionList = document.getElementById('question-list');
                     const placeholder = document.getElementById('question-placeholder');
-                    
+
                     if (questionList && questions.length > 0) {
                         if (placeholder) placeholder.classList.add('hidden');
                         questions.forEach(questionText => {
                             const newQuestion = document.createElement('li');
-                            newQuestion.className = 'p-3 bg-white border border-gray-200 rounded-lg text-gray-800 text-sm flex justify-between items-center';
+                            newQuestion.className = 'p-3 bg-white border border-gray-200 rounded-lg text-gray-800 text-sm flex justify-between items-center animate-fade-in';
                             const textSpan = document.createElement('span');
                             textSpan.textContent = questionText;
                             newQuestion.appendChild(textSpan);
@@ -2317,21 +2373,21 @@
                 if (fields['ideas']) {
                     const ideas = JSON.parse(fields['ideas']);
                     const container = document.getElementById('idea-bubble-list-container');
-                    
+
                     if (container) {
                         ideas.forEach(idea => {
                             const bubble = document.createElement('div');
                             bubble.className = 'post-it-bubble';
                             const innerDiv = document.createElement('div');
                             innerDiv.className = 'post-it-bubble-inner';
-                            
+
                             const nameInput = document.createElement('input');
                             nameInput.type = 'text';
                             nameInput.value = idea.name;
                             nameInput.className = 'post-it-name-input';
                             nameInput.addEventListener('input', scheduleAutoSave);
                             innerDiv.appendChild(nameInput);
-                            
+
                             const textArea = document.createElement('textarea');
                             textArea.value = idea.text;
                             textArea.className = 'post-it-text-bubble';
@@ -2341,9 +2397,9 @@
                                 scheduleAutoSave();
                             });
                             innerDiv.appendChild(textArea);
-                            
+
                             bubble.appendChild(innerDiv);
-                            
+
                             const deleteBtn = document.createElement('button');
                             deleteBtn.className = 'post-it-delete-bubble';
                             deleteBtn.innerHTML = '&times;';
@@ -2352,7 +2408,7 @@
                                 scheduleAutoSave();
                             };
                             bubble.appendChild(deleteBtn);
-                            
+
                             container.prepend(bubble);
                         });
                     }
@@ -2363,7 +2419,7 @@
                     const emojis = JSON.parse(fields['reflection-emojis']);
                     const sentenceBox = document.getElementById('reflection-emoji-sentence-box');
                     const placeholder = sentenceBox?.querySelector('.placeholder');
-                    
+
                     if (sentenceBox && emojis.length > 0) {
                         if (placeholder) placeholder.classList.add('hidden');
                         emojis.forEach(emoji => {
@@ -2462,6 +2518,38 @@
          let isResizing = false;
          let resizeHandleType = ''; // e.g., 'bottom-right'
          let initialResizeInfo = {}; // Store initial pos/size during resize
+
+        // --- 홍익인간 모달 기능 ---
+        const hongikInganSpan = document.getElementById('hongik-ingan');
+        const hongikModal = document.getElementById('hongik-modal');
+        const closeHongikModal = document.getElementById('close-hongik-modal');
+
+        if (hongikInganSpan) {
+            hongikInganSpan.addEventListener('click', () => {
+                if (hongikModal) {
+                    hongikModal.classList.remove('hidden');
+                    hongikModal.classList.add('flex');
+                }
+            });
+        }
+
+        if (closeHongikModal) {
+            closeHongikModal.addEventListener('click', () => {
+                if (hongikModal) {
+                    hongikModal.classList.add('hidden');
+                    hongikModal.classList.remove('flex');
+                }
+            });
+        }
+
+        if (hongikModal) {
+            hongikModal.addEventListener('click', (e) => {
+                if (e.target === hongikModal) {
+                    hongikModal.classList.add('hidden');
+                    hongikModal.classList.remove('flex');
+                }
+            });
+        }
 
         // --- Core Functions ---
 
@@ -4186,7 +4274,7 @@
                          link.download = `앱디자인_페이지${currentPageIndex + 1}.webp`;
                          link.click();
                          URL.revokeObjectURL(url);
-                         
+
                          // Show success message
                          alert(`페이지 ${currentPageIndex + 1}이(가) 다운로드되었습니다!`);
                      }, 'image/webp', 0.9);
@@ -4627,19 +4715,19 @@
              // Tab titles and descriptions in main content
              const lightTitle = document.querySelector('#content-light h2');
              if (lightTitle) lightTitle.textContent = t.lightTitle;
-             
+
              const lightDesc = document.querySelector('#content-light > p');
              if (lightDesc) lightDesc.textContent = t.lightDesc;
 
              const mirrorTitle = document.querySelector('#content-mirror h2');
              if (mirrorTitle) mirrorTitle.textContent = t.mirrorTitle;
-             
+
              const mirrorDesc = document.querySelector('#content-mirror > p');
              if (mirrorDesc) mirrorDesc.textContent = t.mirrorDesc;
 
              const windowTitle = document.querySelector('#content-window h2');
              if (windowTitle) windowTitle.textContent = t.windowTitle;
-             
+
              const windowDesc = document.querySelector('#content-window > p');
              if (windowDesc) windowDesc.textContent = t.windowDesc;
 
@@ -4648,16 +4736,16 @@
 
              const darknessTitle = document.querySelector('#content-darkness h2');
              if (darknessTitle) darknessTitle.textContent = t.darknessTitle;
-             
+
              const darknessDesc = document.querySelector('#content-darkness > p');
              if (darknessDesc) darknessDesc.textContent = t.darknessDesc;
 
              const fruitTitle = document.querySelector('#content-fruit h2');
              if (fruitTitle) fruitTitle.textContent = t.fruitTitle;
-             
+
              const reportTitle = document.querySelector('#content-report h2');
              if (reportTitle) reportTitle.textContent = t.reportTitle;
-             
+
              const reportDesc = document.querySelector('#content-report > p');
              if (reportDesc) reportDesc.textContent = t.reportDesc;
 
@@ -4861,12 +4949,120 @@
          // --- End of new functionality ---
 
          // --- 보고서 기능 ---
+         
+         // 작성자 이름 실시간 반영
+         document.addEventListener('input', e => {
+             if (e.target.id === 'report-author-name') {
+                 const v = e.target.value.trim();
+                 const d = document.getElementById('report-author-display');
+                 if (d) {
+                     d.textContent = v || '작성자 이름을 입력하세요';
+                 }
+             }
+         });
+
+         // 파일명 생성 함수
+         function makeExportFilename(ext) {
+             const nameInput = document.getElementById('report-author-name');
+             const name = (nameInput?.value || '무명').trim() || '무명';
+             const now = new Date();
+             const pad = n => String(n).padStart(2, '0');
+             const stamp = `${now.getFullYear()}${pad(now.getMonth()+1)}${pad(now.getDate())}_${pad(now.getHours())}${pad(now.getMinutes())}${pad(now.getSeconds())}`;
+             return `홍당뮤_보고서_${name}_${stamp}.${ext}`;
+         }
+
+         // 선택된 섹션 가져오기
+         function getSelectedSections() {
+             const sectionMap = {
+                 'export-step-light': 'report-content section:nth-child(1)',
+                 'export-step-mirror': 'report-content section:nth-child(2)',
+                 'export-step-window': 'report-content section:nth-child(3)',
+                 'export-step-door': 'report-content section:nth-child(4)',
+                 'export-step-dark': 'report-content section:nth-child(5)',
+                 'export-step-fruit': 'report-content section:nth-child(6)'
+             };
+
+             const selected = [];
+             Object.keys(sectionMap).forEach(checkboxId => {
+                 const checkbox = document.getElementById(checkboxId);
+                 if (checkbox && checkbox.checked) {
+                     const section = document.querySelector(`#${sectionMap[checkboxId]}`);
+                     if (section && section.offsetParent !== null) {
+                         selected.push(section);
+                     }
+                 }
+             });
+             return selected;
+         }
+
+         // 내보내기용 래퍼 생성
+         function buildExportWrapper() {
+             const sections = getSelectedSections();
+             if (!sections.length) {
+                 alert('선택된 단계가 없습니다.');
+                 return null;
+             }
+
+             const wrapper = document.createElement('div');
+             wrapper.style.background = '#fff';
+             wrapper.style.padding = '24px';
+             wrapper.style.color = '#111';
+
+             // 헤더 추가
+             const nameInput = document.getElementById('report-author-name');
+             const name = (nameInput?.value || '무명').trim() || '무명';
+             const header = document.createElement('div');
+             header.innerHTML = `
+                 <h1 style="font-size:24px; margin-bottom:8px; font-weight:bold;">홍당뮤 보고서</h1>
+                 <div style="font-size:14px;">보고서 작성자: <b>${name}</b></div>
+                 <hr style="margin:12px 0; border:none; border-top:1px solid #ccc;">
+             `;
+             wrapper.appendChild(header);
+
+             // 선택된 섹션 클론 추가
+             sections.forEach((s, i) => {
+                 const clone = s.cloneNode(true);
+                 wrapper.appendChild(clone);
+                 if (i < sections.length - 1) {
+                     const hr = document.createElement('hr');
+                     hr.style.margin = '16px 0';
+                     hr.style.border = 'none';
+                     hr.style.borderTop = '1px solid #eee';
+                     wrapper.appendChild(hr);
+                 }
+             });
+
+             return wrapper;
+         }
+
+         // 전체 선택 체크박스 기능
+         const selectAllCheckbox = document.getElementById('export-select-all');
+         const stepCheckboxes = document.querySelectorAll('.export-step-checkbox');
+
+         if (selectAllCheckbox) {
+             selectAllCheckbox.addEventListener('change', (e) => {
+                 stepCheckboxes.forEach(cb => {
+                     cb.checked = e.target.checked;
+                 });
+             });
+         }
+
+         // 개별 체크박스 변경 시 전체 선택 상태 업데이트
+         stepCheckboxes.forEach(cb => {
+             cb.addEventListener('change', () => {
+                 if (selectAllCheckbox) {
+                     const allChecked = Array.from(stepCheckboxes).every(c => c.checked);
+                     selectAllCheckbox.checked = allChecked;
+                 }
+             });
+         });
+
          function updateReportData() {
              // 작성자 이름
              const reportAuthorName = document.getElementById('report-author-name');
              const reportAuthorDisplay = document.getElementById('report-author-display');
              if (reportAuthorDisplay && reportAuthorName) {
-                 reportAuthorDisplay.textContent = reportAuthorName.value.trim() || '-';
+                 reportAuthorDisplay.textContent = reportAuthorName.value.trim() || '작성자 이름을 입력하세요';
              }
 
              // 1단계: 빛
@@ -5312,21 +5508,38 @@
              return sections.join('\n');
          }
 
+         // 파일명 생성 함수
+         function generateFilename(extension) {
+             const authorName = document.getElementById('report-author-name')?.value.trim() || '학생';
+             const now = new Date();
+             const year = now.getFullYear();
+             const month = String(now.getMonth() + 1).padStart(2, '0');
+             const day = String(now.getDate()).padStart(2, '0');
+             const hours = String(now.getHours()).padStart(2, '0');
+             const minutes = String(now.getMinutes()).padStart(2, '0');
+             const seconds = String(now.getSeconds()).padStart(2, '0');
+             const timestamp = `${year}${month}${day}_${hours}${minutes}${seconds}`;
+             return `홍당뮤_보고서_${authorName}_${timestamp}.${extension}`;
+         }
+
          // 내보내기 기능
          if (document.getElementById('export-pdf-btn')) {
              document.getElementById('export-pdf-btn').addEventListener('click', () => {
-                 const reportContent = document.getElementById('report-content');
-                 if (reportContent && typeof html2canvas !== 'undefined') {
-                     // HTML을 Canvas로 변환 후 이미지로 PDF 생성
-                     html2canvas(reportContent, {
+                 const wrapper = buildExportWrapper();
+                 if (!wrapper) return;
+
+                 document.body.appendChild(wrapper);
+                 wrapper.style.position = 'absolute';
+                 wrapper.style.left = '-9999px';
+
+                 if (typeof html2canvas !== 'undefined') {
+                     html2canvas(wrapper, {
                          scale: 2,
                          useCORS: true,
                          backgroundColor: '#ffffff'
                      }).then(canvas => {
                          const imgData = canvas.toDataURL('image/png');
-                         const authorName = document.getElementById('report-author-name')?.value.trim() || '학생';
 
-                         // PDF를 만들기 위해 window.print() 사용 (간단한 방법)
                          const printWindow = window.open('', '', 'height=600,width=800');
                          printWindow.document.write('<html><head><title>홍당뮤 보고서</title>');
                          printWindow.document.write('<style>body{margin:0;padding:20px;}img{max-width:100%;}</style>');
@@ -5339,27 +5552,47 @@
                              printWindow.print();
                              showExportSuccess();
                          }, 250);
+
+                         document.body.removeChild(wrapper);
                      }).catch(err => {
                          console.error('PDF 생성 오류:', err);
                          alert('PDF 생성 중 오류가 발생했습니다.');
+                         document.body.removeChild(wrapper);
                      });
                  } else {
                      alert('html2canvas 라이브러리가 필요합니다.');
+                     document.body.removeChild(wrapper);
                  }
              });
          }
 
          if (document.getElementById('export-png-btn')) {
              document.getElementById('export-png-btn').addEventListener('click', () => {
-                 const reportContent = document.getElementById('report-content');
-                 if (reportContent && typeof html2canvas !== 'undefined') {
-                     html2canvas(reportContent, { scale: 2, useCORS: true }).then(canvas => {
+                 const wrapper = buildExportWrapper();
+                 if (!wrapper) return;
+
+                 document.body.appendChild(wrapper);
+                 wrapper.style.position = 'absolute';
+                 wrapper.style.left = '-9999px';
+
+                 if (typeof html2canvas !== 'undefined') {
+                     html2canvas(wrapper, { 
+                         scale: 2, 
+                         useCORS: true,
+                         backgroundColor: '#ffffff'
+                     }).then(canvas => {
                          const link = document.createElement('a');
-                         link.download = '홍당뮤_보고서.png';
+                         link.download = makeExportFilename('png');
                          link.href = canvas.toDataURL('image/png');
                          link.click();
                          showExportSuccess();
-                     }).catch(err => console.error('PNG 생성 오류:', err));
+                         document.body.removeChild(wrapper);
+                     }).catch(err => {
+                         console.error('PNG 생성 오류:', err);
+                         document.body.removeChild(wrapper);
+                     });
+                 } else {
+                     document.body.removeChild(wrapper);
                  }
              });
          }
@@ -5367,23 +5600,27 @@
          if (document.getElementById('export-txt-btn')) {
              document.getElementById('export-txt-btn').addEventListener('click', () => {
                  try {
-                     const content = generateReportText();
+                     const wrapper = buildExportWrapper();
+                     if (!wrapper) return;
 
-                     // BOM 추가하여 UTF-8 인코딩 명시
+                     document.body.appendChild(wrapper);
+                     wrapper.style.position = 'absolute';
+                     wrapper.style.left = '-9999px';
+
+                     const content = wrapper.innerText;
+                     document.body.removeChild(wrapper);
+
                      const BOM = '\uFEFF';
                      const blob = new Blob([BOM + content], { type: 'text/plain;charset=utf-8' });
                      const url = URL.createObjectURL(blob);
                      const link = document.createElement('a');
                      link.href = url;
-                     const authorName = document.getElementById('report-author-name')?.value.trim() || '학생';
-                     link.download = `홍당뮤_보고서_${authorName}.txt`;
+                     link.download = makeExportFilename('txt');
                      link.style.display = 'none';
 
-                     // DOM에 추가하고 클릭 후 제거
                      document.body.appendChild(link);
                      link.click();
 
-                     // 약간의 지연 후 정리
                      setTimeout(() => {
                          document.body.removeChild(link);
                          URL.revokeObjectURL(url);
@@ -5399,7 +5636,16 @@
 
          if (document.getElementById('export-copy-btn')) {
              document.getElementById('export-copy-btn').addEventListener('click', () => {
-                 const content = generateReportText();
+                 const wrapper = buildExportWrapper();
+                 if (!wrapper) return;
+
+                 document.body.appendChild(wrapper);
+                 wrapper.style.position = 'absolute';
+                 wrapper.style.left = '-9999px';
+
+                 const content = wrapper.innerText;
+                 document.body.removeChild(wrapper);
+
                  const textarea = document.createElement('textarea');
                  textarea.value = content;
                  document.body.appendChild(textarea);
@@ -5448,7 +5694,7 @@
 
               // 로컬 스토리지에서 데이터 복원
               restoreFromLocalStorage();
-              
+
               // 자동 저장 활성화
               setupAutoSave();
 
@@ -5461,4 +5707,3 @@
     </script>
 </body>
 </html>
-</replit_final_file>
