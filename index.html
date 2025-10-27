@@ -2013,7 +2013,7 @@
     </div>
 
     <!-- 홍익인간 의미 모달 -->
-    <div id="hongik-modal" class="fixed inset-0 bg-black bg-opacity-60 z-[100] hidden items-center justify-center p-4 animate-fade-in">
+    <div id="hongik-modal" class="fixed inset-0 bg-black bg-opacity-60 z-[100] items-center justify-center p-4 animate-fade-in" style="display: none;">
         <div class="bg-white rounded-2xl shadow-xl max-w-md w-full p-6 md:p-8 relative">
             <button id="close-hongik-modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700">
                 <i data-lucide="x" class="w-6 h-6"></i>
@@ -2288,6 +2288,14 @@
             });
             fields['ideas'] = JSON.stringify(ideas);
 
+            // SCAMPER 내용 저장
+            const scamperTextareas = document.querySelectorAll('#scamper-accordion textarea');
+            const scamperData = [];
+            scamperTextareas.forEach((textarea, index) => {
+                scamperData.push(textarea.value);
+            });
+            fields['scamper'] = JSON.stringify(scamperData);
+
             // 성찰 이모지
             const reflectionEmojis = document.querySelectorAll('#reflection-emoji-sentence-box .selected-reflection-emoji');
             const emojis = Array.from(reflectionEmojis).map(e => e.textContent);
@@ -2414,6 +2422,17 @@
                     }
                 }
 
+                // SCAMPER 복원
+                if (fields['scamper']) {
+                    const scamperData = JSON.parse(fields['scamper']);
+                    const scamperTextareas = document.querySelectorAll('#scamper-accordion textarea');
+                    scamperTextareas.forEach((textarea, index) => {
+                        if (scamperData[index] !== undefined) {
+                            textarea.value = scamperData[index];
+                        }
+                    });
+                }
+
                 // 성찰 이모지 복원
                 if (fields['reflection-emojis']) {
                     const emojis = JSON.parse(fields['reflection-emojis']);
@@ -2468,6 +2487,13 @@
                     el.addEventListener('change', scheduleAutoSave);
                 }
             });
+
+            // SCAMPER textarea 특별 처리
+            const scamperTextareas = document.querySelectorAll('#scamper-accordion textarea');
+            scamperTextareas.forEach(textarea => {
+                textarea.addEventListener('input', scheduleAutoSave);
+                textarea.addEventListener('change', scheduleAutoSave);
+            });
         }
 
         const tabColors = {
@@ -2520,36 +2546,36 @@
          let initialResizeInfo = {}; // Store initial pos/size during resize
 
         // --- 홍익인간 모달 기능 ---
-        const hongikInganSpan = document.getElementById('hongik-ingan');
-        const hongikModal = document.getElementById('hongik-modal');
-        const closeHongikModal = document.getElementById('close-hongik-modal');
+        // DOMContentLoaded 후 실행되도록 함수로 래핑
+        function setupHongikModal() {
+            const hongikInganSpan = document.getElementById('hongik-ingan');
+            const hongikModal = document.getElementById('hongik-modal');
+            const closeHongikModal = document.getElementById('close-hongik-modal');
 
-        if (hongikInganSpan) {
-            hongikInganSpan.addEventListener('click', () => {
-                if (hongikModal) {
-                    hongikModal.classList.remove('hidden');
-                    hongikModal.classList.add('flex');
-                }
-            });
+            if (hongikInganSpan && hongikModal) {
+                hongikInganSpan.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    hongikModal.style.display = 'flex';
+                });
+            }
+
+            if (closeHongikModal && hongikModal) {
+                closeHongikModal.addEventListener('click', () => {
+                    hongikModal.style.display = 'none';
+                });
+            }
+
+            if (hongikModal) {
+                hongikModal.addEventListener('click', (e) => {
+                    if (e.target === hongikModal) {
+                        hongikModal.style.display = 'none';
+                    }
+                });
+            }
         }
 
-        if (closeHongikModal) {
-            closeHongikModal.addEventListener('click', () => {
-                if (hongikModal) {
-                    hongikModal.classList.add('hidden');
-                    hongikModal.classList.remove('flex');
-                }
-            });
-        }
-
-        if (hongikModal) {
-            hongikModal.addEventListener('click', (e) => {
-                if (e.target === hongikModal) {
-                    hongikModal.classList.add('hidden');
-                    hongikModal.classList.remove('flex');
-                }
-            });
-        }
+        // 페이지 로드 후 홍익인간 모달 설정
+        setupHongikModal();
 
         // --- Core Functions ---
 
@@ -4512,7 +4538,14 @@
                  console.error("Lucide icon rendering failed:", error);
              }
          }
-         // renderIcons(); // Call only once on DOMContentLoaded
+
+         // DOMContentLoaded에서 초기화 함수들 호출
+         document.addEventListener('DOMContentLoaded', () => {
+             renderIcons();
+             setupHongikModal();
+             setupAutoSave();
+             restoreFromLocalStorage();
+         });
 
         // Call setup for sketch canvas initially if it's the default view
         // setActiveTab will call this when 'door' tab is activated.
@@ -5146,18 +5179,74 @@
              const hmwText = `우리는 어떻게 하면 ${hmwUser?.value.trim() || '[사용자]'}이/가 ${hmwNeed?.value.trim() || '[원하는 것]'}할 수 있을까?`;
              document.getElementById('report-hmw').textContent = hmwText;
 
-             const ideaBubbles = document.querySelectorAll('#idea-bubble-list-container .post-it-bubble');
              const reportIdeas = document.getElementById('report-ideas');
              if (reportIdeas) {
                  reportIdeas.innerHTML = '';
-                 ideaBubbles.forEach(bubble => {
-                     const text = bubble.querySelector('.post-it-text-bubble')?.value;
-                     if (text) {
+                 
+                 // 1. 생각구름 아이디어
+                 const ideaBubbles = document.querySelectorAll('#idea-bubble-list-container .post-it-bubble');
+                 if (ideaBubbles.length > 0) {
+                     const cloudTitle = document.createElement('li');
+                     cloudTitle.innerHTML = '<strong>💭 생각구름 아이디어:</strong>';
+                     reportIdeas.appendChild(cloudTitle);
+                     
+                     ideaBubbles.forEach(bubble => {
+                         const text = bubble.querySelector('.post-it-text-bubble')?.value;
+                         if (text) {
+                             const li = document.createElement('li');
+                             li.textContent = `${text}`;
+                             li.style.marginLeft = '1.5rem';
+                             reportIdeas.appendChild(li);
+                         }
+                     });
+                 }
+                 
+                 // 2. SCAMPER 아이디어
+                 const scamperTextareas = document.querySelectorAll('#scamper-accordion textarea');
+                 const scamperLabels = ['바꾸면? (Substitute)', '합치면? (Combine)', '따라하면? (Adapt)', '크게/작게? (Modify)', '다르게 쓰면? (Put...)', '빼면? (Eliminate)', '뒤집으면? (Reverse)'];
+                 let hasScamper = false;
+                 
+                 scamperTextareas.forEach((textarea, index) => {
+                     if (textarea.value.trim()) {
+                         if (!hasScamper) {
+                             const scamperTitle = document.createElement('li');
+                             scamperTitle.innerHTML = '<strong>🪄 SCAMPER 아이디어:</strong>';
+                             reportIdeas.appendChild(scamperTitle);
+                             hasScamper = true;
+                         }
                          const li = document.createElement('li');
-                         li.textContent = text;
+                         li.textContent = `${scamperLabels[index]}: ${textarea.value}`;
+                         li.style.marginLeft = '1.5rem';
                          reportIdeas.appendChild(li);
                      }
                  });
+                 
+                 // 3. 주사위 아이디어
+                 const diceResult = document.getElementById('dice-result');
+                 if (diceResult && diceResult.textContent.trim() && diceResult.textContent !== '여기에 조합된 아이디어가 나옵니다!' && diceResult.textContent !== '아이디어를 입력하고 주사위를 굴려보세요!') {
+                     const diceTitle = document.createElement('li');
+                     diceTitle.innerHTML = '<strong>🎲 주사위 아이디어:</strong>';
+                     reportIdeas.appendChild(diceTitle);
+                     
+                     const li = document.createElement('li');
+                     li.textContent = `${diceResult.textContent}`;
+                     li.style.marginLeft = '1.5rem';
+                     reportIdeas.appendChild(li);
+                 }
+                 
+                 // 4. 삼삼오오 아이디어
+                 const countdownIdea = document.getElementById('countdown-idea-result');
+                 if (countdownIdea && countdownIdea.value.trim()) {
+                     const countdownTitle = document.createElement('li');
+                     countdownTitle.innerHTML = '<strong>⏰ 삼삼오오 아이디어:</strong>';
+                     reportIdeas.appendChild(countdownTitle);
+                     
+                     const li = document.createElement('li');
+                     li.textContent = `${countdownIdea.value}`;
+                     li.style.marginLeft = '1.5rem';
+                     reportIdeas.appendChild(li);
+                 }
+                 
                  if (reportIdeas.children.length === 0) {
                      reportIdeas.innerHTML = '<li>작성된 아이디어가 없습니다.</li>';
                  }
